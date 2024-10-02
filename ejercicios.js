@@ -2,8 +2,8 @@
 //1
 const readline = require('readline-sync');
 
-let nombre = readline.question("Ingresa tu nombre:");
-const edad = parseInt(readline.question("Ingresa tu edad:"));
+let nombre = readline.question("Dime tu nombre:");
+const edad = parseInt(readline.question("Dime tu edad:"));
 var gustaProgramar = readline.keyInYN("¿Te gusta programar?");
 
 console.log("Nombre:", nombre);
@@ -59,7 +59,7 @@ if (numeroUsuario > 10) {
     console.log("El número es igual a 10.");
 }
 
-//Nivel 2 intermedio
+//Nivel 2 Intermedio
 //1
 
 let num = parseInt(readline.question("Dime un número: "));
@@ -118,7 +118,7 @@ for (let nombre of nombres) {
     console.log(nombre);
 }
 
-// Nivel 3 avanzado
+// Nivel 3 Avanzado
 //1
 
 let numm1 = parseFloat(readline.question("Dime un número: "));
@@ -269,3 +269,62 @@ function completarTarea(index) {
         console.log("Índice de tarea no válido.");
     }
 }
+
+// Nivel 4 Desafío
+
+//1
+function generarContraseña(longitud) {
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let contraseña = '';
+
+    for (let i = 0; i < longitud; i++) {
+        const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+        contraseña += caracteres.charAt(indiceAleatorio);
+    }
+
+    return contraseña;
+}
+
+const longitud = parseInt(readline.question('Dime la longitud de la contraseña: '));
+
+const contraseñaGenerada = generarContraseña(longitud);
+console.log(`Tu contraseña aleatoria es: ${contraseñaGenerada}`);
+
+//2
+function calcularEdad(fechaNacimiento) {
+    const fechaActual = new Date();
+
+    const partesNacimiento = fechaNacimiento.split("-");
+    const dia = parseInt(partesNacimiento[0]);
+    const mes = parseInt(partesNacimiento[1]) - 1;
+    let año = parseInt(partesNacimiento[2]);
+
+    año = año < 100 ? (año >= 50 ? 1900 + año : 2000 + año) : año;
+
+    const nacimiento = new Date(año, mes, dia);
+
+    let edad1 = fechaActual.getFullYear() - nacimiento.getFullYear();
+
+    const mesActual = fechaActual.getMonth();
+    const diaActual = fechaActual.getDate();
+    if (mesActual < nacimiento.getMonth() || (mesActual === nacimiento.getMonth() && diaActual < nacimiento.getDate())) {
+        edad1--;
+    }
+
+    return edad1;
+}
+
+const fechaNacimiento = readline.question('Dime tu fecha de nacimiento (DD-MM-YY): ');
+
+const edad1 = calcularEdad(fechaNacimiento);
+console.log(`Tienes ${edad1} años.`);
+
+//3
+
+//4
+//5
+//6
+//7
+//8
+//9
+//10
