@@ -18,7 +18,7 @@ class Pokemon {
         this.ataque = ataque;
         this.defensa = defensa;
         this.movimientos = movimientos;
-        this.curado = false; // Para rastrear si el Pokémon ya se curó
+        this.curado = false; // Para saber si el Pokémon ya se curó
     }
 
     // Método para atacar a otro Pokémon
@@ -135,7 +135,7 @@ class Batalla {
     }
 }
 
-// Clase Juego que maneja el flujo general del juego
+// Clase Juego que maneja el juego en general
 class Juego {
     constructor() {
         // Crear movimientos
