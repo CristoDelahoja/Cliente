@@ -143,15 +143,39 @@ class Juego {
         const placaje = new Movimiento('Placaje', 20);
         const hidrobomba = new Movimiento('Hidrobomba', 50);
         const latigoCepa = new Movimiento('Látigo Cepa', 30);
+        const hiperrayo = new Movimiento('Hiperrayo', 60);
+        const bolaSombra = new Movimiento('Bola Sombra', 45);
+        const puñoFuego = new Movimiento('Puño Fuego', 35);
+        const trueno = new Movimiento('Trueno', 55);
+        const terremoto = new Movimiento('Terremoto', 65);
 
         // Crear Pokémon
-        this.pokemonJugador = new Pokemon('Charizard', 'Fuego', 120, 35, 25, [lanzallamas, placaje]);
-        this.pokemonOponente = new Pokemon('Blastoise', 'Agua', 130, 30, 30, [hidrobomba, placaje]);
+        this.pokemones = [
+            new Pokemon('Charizard', 'Fuego', 120, 35, 25, [lanzallamas, placaje]),
+            new Pokemon('Blastoise', 'Agua', 130, 30, 30, [hidrobomba, placaje]),
+            new Pokemon('Venusaur', 'Planta', 150, 28, 35, [latigoCepa, placaje]),
+            new Pokemon('Pikachu', 'Eléctrico', 100, 40, 20, [trueno, placaje]),
+            new Pokemon('Gengar', 'Fantasma', 110, 45, 20, [bolaSombra, placaje]),
+            new Pokemon('Dragonite', 'Dragón', 160, 50, 40, [hiperrayo, puñoFuego]),
+            new Pokemon('Golem', 'Roca/Tierra', 140, 48, 50, [terremoto, placaje])
+        ];
+    }
+
+    // Método para elegir Pokémon de forma aleatoria
+    elegirPokemonAleatorio() {
+        const indiceAleatorio = Math.floor(Math.random() * this.pokemones.length);
+        return this.pokemones[indiceAleatorio];
     }
 
     // Método para iniciar el juego
     iniciar() {
-        const batalla = new Batalla(this.pokemonJugador, this.pokemonOponente);
+        const pokemonJugador = this.elegirPokemonAleatorio();
+        const pokemonOponente = this.elegirPokemonAleatorio();
+
+        console.log(`Has elegido a ${pokemonJugador.nombre}`);
+        console.log(`Tu oponente ha elegido a ${pokemonOponente.nombre}`);
+
+        const batalla = new Batalla(pokemonJugador, pokemonOponente);
         batalla.iniciar();
     }
 }
