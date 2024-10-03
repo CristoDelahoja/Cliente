@@ -1,82 +1,82 @@
 const readlineSync = require('readline-sync');
 
-// Clase Move que representa los movimientos de un Pokémon
-class Move {
-    constructor(name, damage) {
-        this.name = name;
-        this.damage = damage;
+// Clase Movimiento que representa los movimientos de un Pokémon
+class Movimiento {
+    constructor(nombre, daño) {
+        this.nombre = nombre;
+        this.daño = daño;
     }
 }
 
 // Clase Pokemon que contiene los atributos del Pokémon
 class Pokemon {
-    constructor(name, type, hp, attack, defense, moves) {
-        this.name = name;
-        this.type = type;
+    constructor(nombre, tipo, hp, ataque, defensa, movimientos) {
+        this.nombre = nombre;
+        this.tipo = tipo;
         this.hp = hp;
         this.hpMax = hp;
-        this.attack = attack;
-        this.defense = defense;
-        this.moves = moves;
-        this.healed = false; // Para rastrear si el Pokémon ya se curó
+        this.ataque = ataque;
+        this.defensa = defensa;
+        this.movimientos = movimientos;
+        this.curado = false; // Para rastrear si el Pokémon ya se curó
     }
 
     // Método para atacar a otro Pokémon
-    attackOpponent(opponent, move) {
-        const damage = this.calculateDamage(move, opponent);
-        opponent.hp -= damage;
-        console.log(`${this.name} usó ${move.name} e infligió ${damage.toFixed(2)} de daño a ${opponent.name}!`);
-        if (opponent.hp <= 0) {
-            console.log(`${opponent.name} ha sido derrotado!`);
+    atacar(oponente, movimiento) {
+        const daño = this.calcularDaño(movimiento, oponente);
+        oponente.hp -= daño;
+        console.log(`${this.nombre} usó ${movimiento.nombre} e infligió ${daño.toFixed(2)} de daño a ${oponente.nombre}!`);
+        if (oponente.hp <= 0) {
+            console.log(`${oponente.nombre} ha sido derrotado!`);
         }
     }
 
     // Método para calcular el daño de un ataque
-    calculateDamage(move, opponent) {
-        const randomFactor = Math.random() * (1.0 - 0.85) + 0.85; // Factor aleatorio entre 0.85 y 1.0
-        return ((this.attack / opponent.defense) * move.damage) * randomFactor;
+    calcularDaño(movimiento, oponente) {
+        const factorAleatorio = Math.random() * (1.0 - 0.85) + 0.85; // Factor aleatorio entre 0.85 y 1.0
+        return ((this.ataque / oponente.defensa) * movimiento.daño) * factorAleatorio;
     }
 
     // Método para curarse
-    heal() {
-        if (!this.healed) {
-            const healAmount = this.hpMax * 0.5;
-            this.hp = Math.min(this.hp + healAmount, this.hpMax); // No puede curarse por encima de su HP máximo
-            this.healed = true;
-            console.log(`${this.name} se ha curado y recupera ${healAmount.toFixed(2)} HP!`);
+    curarse() {
+        if (!this.curado) {
+            const cantidadCura = this.hpMax * 0.5;
+            this.hp = Math.min(this.hp + cantidadCura, this.hpMax); // No puede curarse por encima de su HP máximo
+            this.curado = true;
+            console.log(`${this.nombre} se ha curado y recupera ${cantidadCura.toFixed(2)} HP!`);
         } else {
-            console.log(`${this.name} ya no puede curarse.`);
+            console.log(`${this.nombre} ya no puede curarse.`);
         }
     }
 
     // Método para verificar si el Pokémon está derrotado
-    isDefeated() {
+    estaDerrotado() {
         return this.hp <= 0;
     }
 }
 
-// Clase Battle que controla la lógica del combate
-class Battle {
-    constructor(playerPokemon, opponentPokemon) {
-        this.playerPokemon = playerPokemon;
-        this.opponentPokemon = opponentPokemon;
-        this.turn = 'player'; // Controla de quién es el turno
+// Clase Batalla que controla la lógica del combate
+class Batalla {
+    constructor(pokemonJugador, pokemonOponente) {
+        this.pokemonJugador = pokemonJugador;
+        this.pokemonOponente = pokemonOponente;
+        this.turno = 'jugador'; // Controla de quién es el turno
     }
 
     // Método para iniciar el combate
-    start() {
+    iniciar() {
         console.log('¡El combate ha comenzado!');
 
         // Bucle del combate
-        while (!this.playerPokemon.isDefeated() && !this.opponentPokemon.isDefeated()) {
-            if (this.turn === 'player') {
-                this.playerTurn();
+        while (!this.pokemonJugador.estaDerrotado() && !this.pokemonOponente.estaDerrotado()) {
+            if (this.turno === 'jugador') {
+                this.turnoJugador();
             } else {
-                this.opponentTurn();
+                this.turnoOponente();
             }
         }
 
-        if (this.playerPokemon.isDefeated()) {
+        if (this.pokemonJugador.estaDerrotado()) {
             console.log('¡Tu Pokémon ha sido derrotado! La máquina gana.');
         } else {
             console.log('¡Has ganado el combate!');
@@ -84,78 +84,78 @@ class Battle {
     }
 
     // Turno del jugador
-    playerTurn() {
-        console.log(`\nEs el turno de ${this.playerPokemon.name}.`);
-        console.log(`Tu HP: ${this.playerPokemon.hp.toFixed(2)}`);
-        console.log(`HP del oponente: ${this.opponentPokemon.hp.toFixed(2)}`);
+    turnoJugador() {
+        console.log(`\nEs el turno de ${this.pokemonJugador.nombre}.`);
+        console.log(`Tu HP: ${this.pokemonJugador.hp.toFixed(2)}`);
+        console.log(`HP del oponente: ${this.pokemonOponente.hp.toFixed(2)}`);
 
-        const options = ['Atacar', 'Curarse'];
-        const action = readlineSync.keyInSelect(options, '¿Qué deseas hacer?');
+        const opciones = ['Atacar', 'Curarse'];
+        const accion = readlineSync.keyInSelect(opciones, '¿Qué deseas hacer?');
 
-        if (action === 0) {
-            this.playerAttack();
-        } else if (action === 1) {
-            this.playerHeal();
+        if (accion === 0) {
+            this.jugadorAtaca();
+        } else if (accion === 1) {
+            this.jugadorCura();
         }
 
-        if (!this.opponentPokemon.isDefeated()) {
-            this.turn = 'opponent';
+        if (!this.pokemonOponente.estaDerrotado()) {
+            this.turno = 'oponente';
         }
     }
 
     // Método para el ataque del jugador
-    playerAttack() {
-        const moveIndex = readlineSync.keyInSelect(this.playerPokemon.moves.map(move => move.name), 'Elige un movimiento:');
-        if (moveIndex >= 0) {
-            const move = this.playerPokemon.moves[moveIndex];
-            this.playerPokemon.attackOpponent(this.opponentPokemon, move);
+    jugadorAtaca() {
+        const indiceMovimiento = readlineSync.keyInSelect(this.pokemonJugador.movimientos.map(mov => mov.nombre), 'Elige un movimiento:');
+        if (indiceMovimiento >= 0) {
+            const movimiento = this.pokemonJugador.movimientos[indiceMovimiento];
+            this.pokemonJugador.atacar(this.pokemonOponente, movimiento);
         }
     }
 
     // Método para la curación del jugador
-    playerHeal() {
-        this.playerPokemon.heal();
+    jugadorCura() {
+        this.pokemonJugador.curarse();
     }
 
     // Turno de la máquina
-    opponentTurn() {
-        console.log(`\nEs el turno de ${this.opponentPokemon.name}.`);
-        const action = Math.random() < 0.5 ? 'attack' : 'heal'; // La IA elige aleatoriamente
+    turnoOponente() {
+        console.log(`\nEs el turno de ${this.pokemonOponente.nombre}.`);
+        const accion = Math.random() < 0.5 ? 'atacar' : 'curarse'; // La IA elige aleatoriamente
 
-        if (action === 'attack') {
-            const move = this.opponentPokemon.moves[Math.floor(Math.random() * this.opponentPokemon.moves.length)];
-            this.opponentPokemon.attackOpponent(this.playerPokemon, move);
+        if (accion === 'atacar') {
+            const movimiento = this.pokemonOponente.movimientos[Math.floor(Math.random() * this.pokemonOponente.movimientos.length)];
+            this.pokemonOponente.atacar(this.pokemonJugador, movimiento);
         } else {
-            this.opponentPokemon.heal();
+            this.pokemonOponente.curarse();
         }
 
-        if (!this.playerPokemon.isDefeated()) {
-            this.turn = 'player';
+        if (!this.pokemonJugador.estaDerrotado()) {
+            this.turno = 'jugador';
         }
     }
 }
 
-// Clase Game que maneja el flujo general del juego
-class Game {
+// Clase Juego que maneja el flujo general del juego
+class Juego {
     constructor() {
         // Crear movimientos
-        const flamethrower = new Move('Lanzallamas', 40);
-        const tackle = new Move('Placaje', 20);
-        const hydroPump = new Move('Hidrobomba', 50);
-        const vineWhip = new Move('Látigo Cepa', 30);
+        const lanzallamas = new Movimiento('Lanzallamas', 40);
+        const placaje = new Movimiento('Placaje', 20);
+        const hidrobomba = new Movimiento('Hidrobomba', 50);
+        const latigoCepa = new Movimiento('Látigo Cepa', 30);
 
         // Crear Pokémon
-        this.playerPokemon = new Pokemon('Charizard', 'Fuego', 120, 35, 25, [flamethrower, tackle]);
-        this.opponentPokemon = new Pokemon('Blastoise', 'Agua', 130, 30, 30, [hydroPump, tackle]);
+        this.pokemonJugador = new Pokemon('Charizard', 'Fuego', 120, 35, 25, [lanzallamas, placaje]);
+        this.pokemonOponente = new Pokemon('Blastoise', 'Agua', 130, 30, 30, [hidrobomba, placaje]);
     }
 
     // Método para iniciar el juego
-    start() {
-        const battle = new Battle(this.playerPokemon, this.opponentPokemon);
-        battle.start();
+    iniciar() {
+        const batalla = new Batalla(this.pokemonJugador, this.pokemonOponente);
+        batalla.iniciar();
     }
 }
 
 // Iniciar el juego
-const game = new Game();
-game.start();
+const juego = new Juego();
+juego.iniciar();
