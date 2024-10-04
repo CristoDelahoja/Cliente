@@ -154,7 +154,7 @@ console.log(`El resultado de ${num1} ${operador} ${num2} es: ${resultado}`);
 //2
 
 let frase = readline.question("Dime una frase: ");
-let palabras = frase.split(' ');
+let palabras = frase.split(/\s+/);
 
 console.log(`La frase tiene ${palabras.length} palabras.`);
 
@@ -320,11 +320,245 @@ const edad1 = calcularEdad(fechaNacimiento);
 console.log(`Tienes ${edad1} años.`);
 
 //3
+function generarFibonacci(n) {
+    let fibonacci = [0, 1]; // Los primeros dos términos de la secuencia de Fibonacci
+    for (let i = 2; i < n; i++) {
+        fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2]; // Suma los dos anteriores
+    }
+    return fibonacci;
+}
+
+// Generar y mostrar los primeros 10 números de la secuencia de Fibonacci
+const secuenciaFibonacci = generarFibonacci(10);
+console.log("Los primeros 10 términos de la secuencia de Fibonacci son:");
+console.log(secuenciaFibonacci.join(", "));
+
 
 //4
+function ordenarNumeros(array) {
+    let n = array.length;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                // Intercambia los elementos si no están en orden
+                let temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+    return array;
+}
+
+// Ejemplo de array desordenado
+let numeros = [34, 7, 23, 32, 5, 62];
+console.log("Array original: ", numeros);
+
+// Ordenar el array
+let numerosOrdenados = ordenarNumeros(numeros);
+console.log("Array ordenado: ", numerosOrdenados);
+
 //5
+function adivinaElNumero() {
+    const numeroSecreto = Math.floor(Math.random() * 100) + 1;
+    let intentos = 0;
+    let adivinanza;
+
+    do {
+        adivinanza = parseInt(readline.question('Adivina el número entre 1 y 100: '));
+        intentos++;
+
+        if (adivinanza < numeroSecreto) {
+            console.log("El número es mayor.");
+        } else if (adivinanza > numeroSecreto) {
+            console.log("El número es menor.");
+        }
+    } while (adivinanza !== numeroSecreto);
+
+    console.log(`¡Felicidades! Adivinaste el número en ${intentos} intentos.`);
+}
+
+adivinaElNumero();
+
 //6
+class Libro {
+    constructor(titulo, autor, año) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.año = año;
+    }
+
+    mostrarInfo() {
+        return `${this.titulo} de ${this.autor}, publicado en ${this.año}`;
+    }
+}
+
+class Biblioteca {
+    constructor() {
+        this.libros = [];
+    }
+
+    agregarLibro(libro) {
+        this.libros.push(libro);
+    }
+
+    eliminarLibro(titulo) {
+        this.libros = this.libros.filter(libro => libro.titulo !== titulo);
+    }
+
+    mostrarLibros() {
+        if (this.libros.length === 0) {
+            console.log("La biblioteca está vacía.");
+        } else {
+            console.log("Libros en la biblioteca:");
+            this.libros.forEach(libro => console.log(libro.mostrarInfo()));
+        }
+    }
+}
+
+// Ejemplo de uso
+const miBiblioteca = new Biblioteca();
+miBiblioteca.agregarLibro(new Libro("El Quijote", "Miguel de Cervantes", 1605));
+miBiblioteca.agregarLibro(new Libro("Cien años de soledad", "Gabriel García Márquez", 1967));
+miBiblioteca.mostrarLibros();
+
+miBiblioteca.eliminarLibro("El Quijote");
+miBiblioteca.mostrarLibros();
+
 //7
+function calcularCompra() {
+    let total = 0;
+    let precioProducto;
+
+    do {
+        precioProducto = parseFloat(readline.question('Dime el precio del producto (0 para finalizar): '));
+        if (precioProducto > 0) {
+            total += precioProducto;
+        }
+    } while (precioProducto !== 0);
+
+    if (total > 100) {
+        total *= 0.90; // Aplica el 10% de descuento
+        console.log("Se aplicó un descuento del 10%.");
+    }
+
+    console.log(`Total a pagar: ${total.toFixed(2)} euros.`);
+}
+
+calcularCompra();
+
 //8
+function calcularPromedio(calificaciones) {
+    let suma = 0;
+    for (let i = 0; i < calificaciones.length; i++) {
+        suma += calificaciones[i];
+    }
+    return suma / calificaciones.length;
+}
+
+// Solicitar al usuario varias calificaciones
+let calificaciones = [];
+let calificacionn;
+
+do {
+    calificacionn = parseFloat(readline.question('Dime una calificación (o 0 para terminar): '));
+    if (calificacionn > 0) {
+        calificaciones.push(calificacionn);
+    }
+} while (calificacionn !== 0);
+
+if (calificaciones.length > 0) {
+    const promedio = calcularPromedio(calificaciones);
+    console.log(`El promedio de tus calificaciones es: ${promedio.toFixed(2)}`);
+
+    if (promedio >= 60) {
+        console.log("¡Aprobaste!");
+    } else {
+        console.log("Suspendiste.");
+    }
+} else {
+    console.log("No pusiste ninguna calificación.");
+}
+
 //9
+function generarNumerosAleatorios() {
+    let numeros = [];
+    while (numeros.length < 5) {
+        const numeroAleatorio = Math.floor(Math.random() * 20) + 1;
+        if (!numeros.includes(numeroAleatorio)) {
+            numeros.push(numeroAleatorio);
+        }
+    }
+    return numeros;
+}
+
+// Generar y mostrar los números aleatorios sin repetir
+const numerosGenerados = generarNumerosAleatorios();
+console.log("Números aleatorios generados sin repetir: ", numerosGenerados.join(", "));
+
 //10
+// Crear una matriz 5x5 para representar los asientos del teatro
+let asientos = Array.from(Array(5), () => Array(5).fill(false));
+
+function mostrarAsientos() {
+    console.log("Estado de los asientos (false = disponible, true = reservado):");
+    for (let fila = 0; fila < asientos.length; fila++) {
+        console.log(asientos[fila].join(" "));
+    }
+}
+
+function reservarAsiento() {
+    const fila = parseInt(readline.question('Dime la fila del asiento (0-4): '));
+    const columna = parseInt(readline.question('Dime la columna del asiento (0-4): '));
+
+    if (fila >= 0 && fila < 5 && columna >= 0 && columna < 5) {
+        if (!asientos[fila][columna]) {
+            asientos[fila][columna] = true;
+            console.log("Asiento reservado con éxito.");
+        } else {
+            console.log("El asiento ya está reservado.");
+        }
+    } else {
+        console.log("Asiento no válido.");
+    }
+}
+
+function cancelarReserva() {
+    const fila = parseInt(readline.question('Dime la fila del asiento a cancelar (0-4): '));
+    const columna = parseInt(readline.question('Dime la columna del asiento a cancelar (0-4): '));
+
+    if (fila >= 0 && fila < 5 && columna >= 0 && columna < 5) {
+        if (asientos[fila][columna]) {
+            asientos[fila][columna] = false;
+            console.log("Reserva cancelada con éxito.");
+        } else {
+            console.log("El asiento no está reservado.");
+        }
+    } else {
+        console.log("Asiento no válido.");
+    }
+}
+
+// Menú de opciones
+let opcion;
+do {
+    console.log("\n1. Mostrar asientos\n2. Reservar asiento\n3. Cancelar reserva\n4. Salir");
+    opcion = parseInt(readline.question("Selecciona una opción: "));
+
+    switch (opcion) {
+        case 1:
+            mostrarAsientos();
+            break;
+        case 2:
+            reservarAsiento();
+            break;
+        case 3:
+            cancelarReserva();
+            break;
+        case 4:
+            console.log("Saliendo del sistema...");
+            break;
+        default:
+            console.log("Opción no válida.");
+    }
+} while (opcion !== 4);
