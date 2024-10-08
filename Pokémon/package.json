@@ -1,0 +1,17 @@
+{
+    "name": "pokemon-battle-simulator",
+    "version": "1.0.0",
+    "description": "A simple Pokémon battle simulator.",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "dependencies": {
+      "readline-sync": "^1.4.10"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
+  

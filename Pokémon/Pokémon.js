@@ -1,6 +1,4 @@
-import { Movimiento } from './Moves.js';
-
-export class Pokemon {
+export class Pokémon {
     constructor(nombre, tipo, hp, ataque, defensa, movimientos) {
         this.nombre = nombre;
         this.tipo = tipo;

@@ -1,4 +1,3 @@
-import { Pokemon } from './Pokémon.js';
 import readlineSync from 'readline-sync';
 
 export class Batalla {

@@ -1,6 +1,12 @@
-import { Movimiento } from './Moves.js';
-import { Pokemon } from './Pokémon.js';
-import { Batalla } from './Battle.js';
+import {
+    Movimiento
+} from './Moves.js';
+import {
+    Pokémon
+} from './Pokémon.js';
+import {
+    Batalla
+} from './Battle.js';
 
 export class Juego {
     constructor() {
@@ -15,13 +21,13 @@ export class Juego {
         const terremoto = new Movimiento('Earthquake', 65);
 
         this.pokemones = [
-            new Pokemon('Charizard', 'Fire', 120, 35, 25, [lanzallamas, placaje]),
-            new Pokemon('Blastoise', 'Water', 130, 30, 30, [hidrobomba, placaje]),
-            new Pokemon('Venusaur', 'Grass', 150, 28, 35, [latigoCepa, placaje]),
-            new Pokemon('Pikachu', 'Electric', 100, 40, 20, [trueno, placaje]),
-            new Pokemon('Gengar', 'Ghost', 110, 45, 20, [bolaSombra, placaje]),
-            new Pokemon('Dragonite', 'Dragon', 160, 50, 40, [hiperrayo, puñoFuego]),
-            new Pokemon('Golem', 'Rock/Ground', 140, 48, 50, [terremoto, placaje])
+            new Pokémon('Charizard', 'Fire', 120, 35, 25, [lanzallamas, placaje]),
+            new Pokémon('Blastoise', 'Water', 130, 30, 30, [hidrobomba, placaje]),
+            new Pokémon('Venusaur', 'Grass', 150, 28, 35, [latigoCepa, placaje]),
+            new Pokémon('Pikachu', 'Electric', 100, 40, 20, [trueno, placaje]),
+            new Pokémon('Gengar', 'Ghost', 110, 45, 20, [bolaSombra, placaje]),
+            new Pokémon('Dragonite', 'Dragon', 160, 50, 40, [hiperrayo, puñoFuego]),
+            new Pokémon('Golem', 'Rock/Ground', 140, 48, 50, [terremoto, placaje])
         ];
     }
 
