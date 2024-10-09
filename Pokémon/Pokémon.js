@@ -1,3 +1,4 @@
+import { tipoVentajas } from './tipoVentajas.js';
 export class Pokémon {
     constructor(nombre, tipo, hp, ataque, defensa, movimientos) {
         this.nombre = nombre;
@@ -30,10 +31,9 @@ export class Pokémon {
 
     calcularDaño(movimiento, oponente) {
         const factorAleatorio = Math.random() * (1.0 - 0.85) + 0.85;
-        const multiplicadorTipo = tipoVentajas[movimiento.tipo][oponente.tipo] || 1;
-        return ((this.ataque / oponente.defensa) * movimiento.daño * multiplicadorTipo) * factorAleatorio;
+        const ventajaTipo = tipoVentajas[movimiento.tipo]?.[oponente.tipo] ?? 1;
+        return (((this.ataque * this.nivel) / (oponente.defensa * oponente.nivel)) * movimiento.daño * ventajaTipo) * factorAleatorio;
     }
-
     curarse() {
         if (!this.curado) {
             const cantidadCura = this.hpMax * 0.5;
