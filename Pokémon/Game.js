@@ -297,6 +297,7 @@ export const tipoVentajas = {
         'Dragon': 1
     }
 };
+
 export class Juego {
     constructor() {
         const movimientos = [
@@ -305,7 +306,6 @@ export class Juego {
             new Movimiento('Vine Whip', 30, 'Grass'),
             new Movimiento('Thunder', 55, 'Electric'),
             new Movimiento('Shadow Ball', 45, 'Ghost'),
-            new Movimiento('Fire Punch', 35, 'Fire'),
             new Movimiento('Earthquake', 65, 'Ground'),
             new Movimiento('Hyper Beam', 60, 'Normal'),
             new Movimiento('Ice Beam', 50, 'Ice'),
@@ -314,38 +314,37 @@ export class Juego {
             new Movimiento('Fairy Wind', 30, 'Fairy'),
             new Movimiento('Rock Slide', 50, 'Rock'),
             new Movimiento('Poison Fang', 40, 'Poison'),
-            new Movimiento('Fighting Spirit', 45, 'Fighting'),
+            new Movimiento('Close Combat', 45, 'Fighting'),
             new Movimiento('Dragon Pulse', 50, 'Dragon'),
-            new Movimiento('Fury Cutter', 35, 'Bug'),
-            new Movimiento('Ancient Power', 40, 'Rock'),
-            new Movimiento('Aqua Tail', 50, 'Water')
+            new Movimiento('Steel Wing', 40, 'Steel'),
+            new Movimiento('Crunch', 45, 'Dark'),
+            new Movimiento('Hurricane', 50, 'Flying'),
         ];
 
-        // Pokémon (18 tipos)
         this.pokemons = [
-            new Pokémon('Charizard', 'Fire', 120, 35, 25, [movimientos[0], movimientos[6]]), // Fire
-            new Pokémon('Blastoise', 'Water', 130, 30, 30, [movimientos[1], movimientos[18]]), // Water
-            new Pokémon('Venusaur', 'Grass', 150, 28, 35, [movimientos[2], movimientos[6]]),
-            new Pokémon('Pikachu', 'Electric', 100, 40, 20, [movimientos[3], movimientos[18]]),
-            new Pokémon('Gengar', 'Ghost', 110, 45, 20, [movimientos[4], movimientos[18]]), // Ghost
-            new Pokémon('Dragonite', 'Dragon', 160, 50, 40, [movimientos[15], movimientos[18]]), // Dragon
-            new Pokémon('Golem', 'Rock', 140, 48, 50, [movimientos[12], movimientos[18]]), // Rock
-            new Pokémon('Lucario', 'Fighting', 110, 50, 30, [movimientos[13], movimientos[18]]), // Fighting
-            new Pokémon('Alakazam', 'Psychic', 90, 40, 25, [movimientos[11], movimientos[18]]),
-            new Pokémon('Jolteon', 'Electric', 95, 40, 30, [movimientos[3], movimientos[18]]),
-            new Pokémon('Lapras', 'Ice', 130, 35, 30, [movimientos[8], movimientos[1]]),
-            new Pokémon('Scyther', 'Bug', 120, 50, 30, [movimientos[9], movimientos[18]]), // Bug
-            new Pokémon('Togekiss', 'Fairy', 120, 50, 25, [movimientos[10], movimientos[18]]), // Fairy
-            new Pokémon('Machamp', 'Fighting', 130, 55, 35, [movimientos[13], movimientos[18]]), // Fighting
-            new Pokémon('Nidoking', 'Poison/Ground', 130, 50, 30, [movimientos[12], movimientos[14]]), // Poison
-            new Pokémon('Gardevoir', 'Psychic/Fairy', 95, 45, 30, [movimientos[11], movimientos[10]]),
-            new Pokémon('Salamence', 'Dragon', 160, 60, 40, [movimientos[15], movimientos[18]]),
-            new Pokémon('Greninja', 'Water/Dark', 110, 45, 25, [movimientos[1], movimientos[14]])
+            new Pokémon('Charizard', 'Fire', 120, 35, 25, [movimientos[0], movimientos[13]]),
+            new Pokémon('Blastoise', 'Water', 130, 30, 30, [movimientos[1], movimientos[16]]),
+            new Pokémon('Venusaur', 'Grass', 150, 28, 35, [movimientos[2], movimientos[12]]),
+            new Pokémon('Pikachu', 'Electric', 100, 40, 20, [movimientos[3], movimientos[9]]),
+            new Pokémon('Gengar', 'Ghost', 110, 45, 20, [movimientos[4], movimientos[8]]),
+            new Pokémon('Dragonite', 'Dragon', 160, 50, 40, [movimientos[14], movimientos[3]]),
+            new Pokémon('Golem', 'Rock', 140, 48, 50, [movimientos[11], movimientos[5]]),
+            new Pokémon('Dugtrio', 'Ground', 110, 50, 30, [movimientos[5], movimientos[12]]),
+            new Pokémon('Alakazam', 'Psychic', 90, 40, 25, [movimientos[9], movimientos[4]]),
+            new Pokémon('Lapras', 'Ice', 130, 35, 30, [movimientos[7], movimientos[1]]),
+            new Pokémon('Scyther', 'Bug', 120, 50, 30, [movimientos[8], movimientos[10]]),
+            new Pokémon('Togekiss', 'Fairy', 120, 50, 25, [movimientos[10], movimientos[3]]),
+            new Pokémon('Machamp', 'Fighting', 130, 55, 35, [movimientos[13], movimientos[11]]),
+            new Pokémon('Nidoking', 'Poison', 130, 50, 30, [movimientos[12], movimientos[5]]),
+            new Pokémon('Registeel', 'Steel', 160, 60, 40, [movimientos[15], movimientos[1]]),
+            new Pokémon('Umbreon', 'Dark', 110, 45, 25, [movimientos[16], movimientos[9]]),
+            new Pokémon('Zangoose', 'Normal', 130, 50, 30, [movimientos[6], movimientos[1]]),
+            new Pokémon('Pidgeot', 'Flying', 120, 80, 75, [movimientos[17], movimientos[6]])
         ];
     }
 
     elegirPokemonAleatorio() {
-        const indiceAleatorio = Math.floor(Math.random() * this.pokemones.length);
+        const indiceAleatorio = Math.floor(Math.random() * this.pokemons.length);
         return this.pokemons[indiceAleatorio];
     }
 

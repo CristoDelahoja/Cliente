@@ -1,4 +1,5 @@
 import readlineSync from 'readline-sync';
+
 export class Batalla {
     constructor(pokemonsJugador, pokemonsOponente) {
         this.pokemonsJugador = pokemonsJugador;
@@ -7,26 +8,31 @@ export class Batalla {
     }
 
     iniciar() {
-        console.log('The battle has started!');
+        console.log('====================');
+        console.log('The battle has begun!');
+        console.log('====================');
+        
         while (this.pokemonsJugador.length > 0 && this.pokemonsOponente.length > 0) {
             const pokemonJugador = this.pokemonsJugador[this.turno];
             const pokemonOponente = this.pokemonsOponente[this.turno];
 
             if (pokemonJugador.estaDerrotado()) {
-                console.log(`${pokemonJugador.nombre} has been defeated!`);
+                console.log(`\n${pokemonJugador.nombre} has been defeated!`);
                 this.pokemonsJugador.splice(this.turno, 1);
                 continue;
             }
 
             if (pokemonOponente.estaDerrotado()) {
-                console.log(`${pokemonOponente.nombre} has been defeated!`);
+                console.log(`\n${pokemonOponente.nombre} has been defeated!`);
                 this.pokemonsOponente.splice(this.turno, 1);
                 continue;
             }
 
-            console.log(`\nIt's ${pokemonJugador.nombre}'s turn.`);
-            console.log(`Your HP: ${pokemonJugador.hp.toFixed(2)}`);
-            console.log(`Opponent's HP: ${pokemonOponente.hp.toFixed(2)}`);
+            console.log('\n====================');
+            console.log(`It's ${pokemonJugador.nombre}'s turn`);
+            console.log(`Current HP: ${pokemonJugador.hp.toFixed(2)} / ${pokemonJugador.hpMax.toFixed(2)}`);
+            console.log(`Opponent's HP: ${pokemonOponente.hp.toFixed(2)} / ${pokemonOponente.hpMax.toFixed(2)}`);
+            console.log('====================');
 
             const opciones = ['Attack', 'Heal'];
             const accion = readlineSync.keyInSelect(opciones, 'What do you want to do?');
@@ -43,9 +49,9 @@ export class Batalla {
         }
 
         if (this.pokemonsJugador.length === 0) {
-            console.log('Your team has been defeated! The machine wins.');
+            console.log('\nYour team has been defeated! The machine wins.');
         } else {
-            console.log('You have won the battle!');
+            console.log('\nYou have won the battle!');
         }
     }
 
