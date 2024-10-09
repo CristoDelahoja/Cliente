@@ -8,17 +8,49 @@ import {
     Batalla
 } from './Battle.js';
 
+const tipoVentajas = {
+    'Fire': {
+        'Grass': 2,
+        'Water': 0.5,
+        'Fire': 1
+    },
+    'Water': {
+        'Fire': 2,
+        'Grass': 0.5,
+        'Water': 1
+    },
+    'Grass': {
+        'Water': 2,
+        'Fire': 0.5,
+        'Grass': 1
+    },
+    'Electric': {
+        'Water': 2,
+        'Grass': 1,
+        'Electric': 1
+    },
+    'Ghost': {
+        'Ghost': 1,
+        'Normal': 0
+    },
+    'Rock/Ground': {
+        'Water': 1,
+        'Grass': 0.5,
+        'Electric': 1
+    },
+};
+
 export class Juego {
     constructor() {
-        const lanzallamas = new Movimiento('Flamethrower', 40);
-        const placaje = new Movimiento('Tackle', 20);
-        const hidrobomba = new Movimiento('Hydro Pump', 50);
-        const latigoCepa = new Movimiento('Vine Whip', 30);
-        const hiperrayo = new Movimiento('Hyper Beam', 60);
-        const bolaSombra = new Movimiento('Shadow Ball', 45);
-        const puñoFuego = new Movimiento('Fire Punch', 35);
-        const trueno = new Movimiento('Thunder', 55);
-        const terremoto = new Movimiento('Earthquake', 65);
+        const lanzallamas = new Movimiento('Flamethrower', 40, 'Fire');
+        const placaje = new Movimiento('Tackle', 20, 'Normal');
+        const hidrobomba = new Movimiento('Hydro Pump', 50, 'Water');
+        const latigoCepa = new Movimiento('Vine Whip', 30, 'Grass');
+        const hiperrayo = new Movimiento('Hyper Beam', 60, 'Normal');
+        const bolaSombra = new Movimiento('Shadow Ball', 45, 'Ghost');
+        const puñoFuego = new Movimiento('Fire Punch', 35, 'Fire');
+        const trueno = new Movimiento('Thunder', 55, 'Electric');
+        const terremoto = new Movimiento('Earthquake', 65, 'Ground');
 
         this.pokemones = [
             new Pokémon('Charizard', 'Fire', 120, 35, 25, [lanzallamas, placaje]),
@@ -36,14 +68,22 @@ export class Juego {
         return this.pokemones[indiceAleatorio];
     }
 
+    elegirPokemonesAleatorios(cantidad) {
+        const seleccionados = [];
+        for (let i = 0; i < cantidad; i++) {
+            seleccionados.push(this.elegirPokemonAleatorio());
+        }
+        return seleccionados;
+    }
+
     iniciar() {
-        const pokemonJugador = this.elegirPokemonAleatorio();
-        const pokemonOponente = this.elegirPokemonAleatorio();
+        const pokemonesJugador = this.elegirPokemonesAleatorios(3);
+        const pokemonesOponente = this.elegirPokemonesAleatorios(3);
 
-        console.log(`You chose ${pokemonJugador.nombre}`);
-        console.log(`Your opponent chose ${pokemonOponente.nombre}`);
+        console.log(`You chose: ${pokemonesJugador.map(p => p.nombre).join(', ')}`);
+        console.log(`Your opponent chose: ${pokemonesOponente.map(p => p.nombre).join(', ')}`);
 
-        const batalla = new Batalla(pokemonJugador, pokemonOponente);
+        const batalla = new Batalla(pokemonesJugador, pokemonesOponente);
         batalla.iniciar();
     }
 }
