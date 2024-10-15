@@ -357,8 +357,8 @@ export class Juego {
     }
 
     iniciar() {
-        const pokemonesJugador = this.elegirPokemonesAleatorios(3);
-        const pokemonesOponente = this.elegirPokemonesAleatorios(3);
+        const pokemonesJugador = this.elegirPokemonesAleatorios(1);
+        const pokemonesOponente = this.elegirPokemonesAleatorios(1);
 
         console.log(`You chose: ${pokemonesJugador.map(p => p.nombre).join(', ')}`);
         console.log(`Your opponent chose: ${pokemonesOponente.map(p => p.nombre).join(', ')}`);
