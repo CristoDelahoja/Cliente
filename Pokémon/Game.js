@@ -1,3 +1,4 @@
+// Importa las clases Movimiento, Pokémon, y Batalla desde sus respectivos archivos
 import {
     Movimiento
 } from './Moves.js';
@@ -8,6 +9,14 @@ import {
     Batalla
 } from './Battle.js';
 
+// Importar chalk para colorear el logotipo
+import chalk from 'chalk';
+
+// Logotipo de Pokémon
+
+
+// Define las ventajas de tipo, un objeto que mapea tipos de Pokémon a sus interacciones con otros tipos
+// Los valores son multiplicadores de daño: 2 (súper efectivo), 0.5 (poco efectivo), 0 (sin efecto), 1 (neutro)
 export const tipoVentajas = {
     'Normal': {
         'Fighting': 2,
@@ -298,8 +307,13 @@ export const tipoVentajas = {
     }
 };
 
+// Define la clase Juego que gestiona la configuración del juego, creación de movimientos, Pokémon, y batallas
 export class Juego {
     constructor() {
+         // Mostrar el logotipo cuando se crea el juego
+         console.log(logo);
+
+        // Lista de movimientos disponibles, cada uno con su nombre, poder y tipo
         const movimientos = [
             new Movimiento('Flamethrower', 40, 'Fire'),
             new Movimiento('Hydro Pump', 50, 'Water'),
@@ -321,6 +335,7 @@ export class Juego {
             new Movimiento('Hurricane', 50, 'Flying'),
         ];
 
+        // Lista de Pokémon disponibles con sus atributos: nombre, tipo, HP, ataque, defensa y movimientos
         this.pokemons = [
             new Pokémon('Charizard', 'Fire', 120, 35, 25, [movimientos[0], movimientos[13]]),
             new Pokémon('Blastoise', 'Water', 130, 30, 30, [movimientos[1], movimientos[16]]),
@@ -343,11 +358,13 @@ export class Juego {
         ];
     }
 
+    // Método para elegir un Pokémon aleatorio de la lista disponible
     elegirPokemonAleatorio() {
         const indiceAleatorio = Math.floor(Math.random() * this.pokemons.length);
         return this.pokemons[indiceAleatorio];
     }
 
+    // Método para elegir una cierta cantidad de Pokémon aleatorios
     elegirPokemonesAleatorios(cantidad) {
         const seleccionados = [];
         for (let i = 0; i < cantidad; i++) {
@@ -356,13 +373,16 @@ export class Juego {
         return seleccionados;
     }
 
+    // Método para iniciar el juego. Aquí se seleccionan equipos aleatorios para el jugador y el oponente
     iniciar() {
         const pokemonesJugador = this.elegirPokemonesAleatorios(3);
         const pokemonesOponente = this.elegirPokemonesAleatorios(3);
 
-        console.log(`You chose: ${pokemonesJugador.map(p => p.nombre).join(', ')}`);
+        // Muestra en la consola los Pokémon elegidos por el jugador y el oponente
+        console.log(`\nYou chose: ${pokemonesJugador.map(p => p.nombre).join(', ')}`);
         console.log(`Your opponent chose: ${pokemonesOponente.map(p => p.nombre).join(', ')}`);
 
+        // Inicia la batalla entre los equipos seleccionados
         const batalla = new Batalla(pokemonesJugador, pokemonesOponente);
         batalla.iniciar();
     }
