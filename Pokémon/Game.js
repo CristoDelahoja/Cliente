@@ -354,14 +354,21 @@ export class Juego {
         return this.pokemons[indiceAleatorio];
     }
 
-    // Método para elegir múltiples Pokémon aleatorios
+    // Método para elegir múltiples Pokémon aleatorios sin repetición
     elegirPokemonesAleatorios(cantidad) {
         const seleccionados = [];
+        const pokemonsDisponibles = [...this.pokemons]; // Copiar la lista de Pokémon disponibles
+
         for (let i = 0; i < cantidad; i++) {
-            seleccionados.push(this.elegirPokemonAleatorio());
+            const indiceAleatorio = Math.floor(Math.random() * pokemonsDisponibles.length);
+            const pokemonSeleccionado = pokemonsDisponibles[indiceAleatorio];
+            seleccionados.push(pokemonSeleccionado);
+            pokemonsDisponibles.splice(indiceAleatorio, 1); // Eliminar el Pokémon seleccionado
         }
+
         return seleccionados;
     }
+
 
     // Método para iniciar el juego
     iniciar() {
