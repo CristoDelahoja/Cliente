@@ -5,13 +5,12 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-      "start": "node index.js"
+        "start": "node index.js"
     },
     "dependencies": {
-      "readline-sync": "^1.4.10"
+        "readline-sync": "^1.4.10"
     },
     "keywords": [],
     "author": "",
     "license": "ISC"
-  }
-  
+}

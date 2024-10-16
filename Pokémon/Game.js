@@ -1,3 +1,5 @@
+import readlineSync from 'readline-sync';
+
 import {
     Movimiento
 } from './Moves.js';
@@ -9,6 +11,7 @@ import {
 } from './Battle.js';
 
 export const tipoVentajas = {
+    // Ventajas de tipo entre Pokémon
     'Normal': {
         'Fighting': 2,
         'Ghost': 0,
@@ -300,6 +303,7 @@ export const tipoVentajas = {
 
 export class Juego {
     constructor() {
+        // Definición de movimientos disponibles
         const movimientos = [
             new Movimiento('Flamethrower', 40, 'Fire'),
             new Movimiento('Hydro Pump', 50, 'Water'),
@@ -321,6 +325,7 @@ export class Juego {
             new Movimiento('Hurricane', 50, 'Flying'),
         ];
 
+        // Definición de Pokémon disponibles
         this.pokemons = [
             new Pokémon('Charizard', 'Fire', 120, 35, 25, [movimientos[0], movimientos[13]]),
             new Pokémon('Blastoise', 'Water', 130, 30, 30, [movimientos[1], movimientos[16]]),
@@ -343,11 +348,13 @@ export class Juego {
         ];
     }
 
+    // Método para elegir un Pokémon aleatorio
     elegirPokemonAleatorio() {
         const indiceAleatorio = Math.floor(Math.random() * this.pokemons.length);
         return this.pokemons[indiceAleatorio];
     }
 
+    // Método para elegir múltiples Pokémon aleatorios
     elegirPokemonesAleatorios(cantidad) {
         const seleccionados = [];
         for (let i = 0; i < cantidad; i++) {
@@ -356,13 +363,26 @@ export class Juego {
         return seleccionados;
     }
 
+    // Método para iniciar el juego
     iniciar() {
-        const pokemonesJugador = this.elegirPokemonesAleatorios(1);
-        const pokemonesOponente = this.elegirPokemonesAleatorios(1);
+        // Preguntar al jugador cuántos Pokémon quiere seleccionar
+        const opciones = ['1vs1', '3vs3', '6vs6'];
+        const seleccion = readlineSync.keyInSelect(opciones, 'Choose battle mode:');
+
+        // Determinar la cantidad de Pokémon según la selección
+        let cantidad = 1; // Valor por defecto para 1vs1
+        if (seleccion === 0) cantidad = 1;
+        else if (seleccion === 1) cantidad = 3;
+        else if (seleccion === 2) cantidad = 6;
+
+        // Elegir Pokémon para el jugador y el oponente
+        const pokemonesJugador = this.elegirPokemonesAleatorios(cantidad);
+        const pokemonesOponente = this.elegirPokemonesAleatorios(cantidad);
 
         console.log(`You chose: ${pokemonesJugador.map(p => p.nombre).join(', ')}`);
         console.log(`Your opponent chose: ${pokemonesOponente.map(p => p.nombre).join(', ')}`);
 
+        // Iniciar la batalla
         const batalla = new Batalla(pokemonesJugador, pokemonesOponente);
         batalla.iniciar();
     }
