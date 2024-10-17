@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayor y Menor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #0073e6;
+        }
+
+        .result {
+            font-size: 18px;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .result.mayor {
+            color: #fff;
+            background-color: #4CAF50;
+        }
+
+        .result.menor {
+            color: #fff;
+            background-color: #e74c3c;
+        }
+
+        .result.diferencia {
+            color: #333;
+            background-color: #f1c40f;
+        }
+
+        button {
+            background-color: #0073e6;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+    </style>
+    <script>
+        function obtenerNumeros() {
+            let numeros = [];
+            for (let i = 0; i < 5; i++) {
+                let numero = parseFloat(prompt(`Dime un número ${i + 1}:`));
+                numeros.push(numero);
+            }
+            return numeros;
+        }
+
+        function main() {
+            let numeros = obtenerNumeros();
+            let mayor = Math.max(...numeros);
+            let menor = Math.min(...numeros);
+            let diferencia = Math.abs(mayor - menor);
+
+            document.getElementById("resultado-mayor").textContent = `Número mayor: ${mayor}`;
+            document.getElementById("resultado-menor").textContent = `Número menor: ${menor}`;
+            document.getElementById("resultado-diferencia").textContent = `Diferencia: ${diferencia}`;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Resultados</h1>
+        <div id="resultado-mayor" class="result mayor">Número mayor:</div>
+        <div id="resultado-menor" class="result menor">Número menor:</div>
+        <div id="resultado-diferencia" class="result diferencia">Diferencia:</div>
+        <button onclick="main()">Calcular</button>
+    </div>
+</body>
+
+</html>
