@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra, Papel o Tijeras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+            background-color: #e0f7fa;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #00796b;
+            margin-bottom: 30px;
+        }
+
+        .opciones {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .opcion {
+            font-size: 60px;
+            margin: 0 30px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #b2dfdb;
+        }
+
+        .opcion:hover {
+            transform: scale(1.3);
+            background-color: #80cbc4;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #00796b;
+        }
+
+        #elecciones {
+            font-size: 24px;
+            margin-top: 10px;
+            color: #004d40;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Piedra, Papel o Tijeras</h1>
+    <div class="opciones">
+        <div class="opcion" onclick="jugar('piedra')">🪨</div>
+        <div class="opcion" onclick="jugar('papel')">📄</div>
+        <div class="opcion" onclick="jugar('tijeras')">✂️</div>
+    </div>
+    <div id="resultado"></div>
+    <div id="elecciones"></div>
+
+    <script>
+        function jugar(opcionJugador) {
+            const opciones = ['piedra', 'papel', 'tijeras'];
+            const opcionMaquina = opciones[Math.floor(Math.random() * opciones.length)];
+            let resultado = '';
+            let mensaje = '';
+
+            if (opcionJugador === opcionMaquina) {
+                resultado = 'Empate';
+                mensaje =
+                    `Los dos habéis elegido ${opcionMaquina === 'piedra' ? '🪨' : opcionMaquina === 'papel' ? '📄' : '✂️'}`;
+            } else if (
+                (opcionJugador === 'piedra' && opcionMaquina === 'tijeras') ||
+                (opcionJugador === 'papel' && opcionMaquina === 'piedra') ||
+                (opcionJugador === 'tijeras' && opcionMaquina === 'papel')
+            ) {
+                resultado = 'Victoria';
+                mensaje =
+                    `¡Ganaste! 💪, ${opcionJugador === 'piedra' ? '🪨' : opcionJugador === 'papel' ? '📄' : '✂️'} vence a ${opcionMaquina === 'piedra' ? '🪨' : opcionMaquina === 'papel' ? '📄' : '✂️'}`;
+            } else {
+                resultado = 'Derrota';
+                mensaje =
+                    `Perdiste 😢, ${opcionMaquina === 'piedra' ? '🪨' : opcionMaquina === 'papel' ? '📄' : '✂️'} vence a ${opcionJugador === 'piedra' ? '🪨' : opcionJugador === 'papel' ? '📄' : '✂️'}`;
+            }
+
+            document.getElementById('resultado').textContent = resultado;
+            document.getElementById('elecciones').textContent = mensaje;
+        }
+    </script>
+</body>
+
+</html>

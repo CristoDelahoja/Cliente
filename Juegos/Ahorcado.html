@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorcado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #e0f7fa;
+            color: #00796b;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #004d40;
+            margin-bottom: 20px;
+        }
+
+        #palabra {
+            font-size: 30px;
+            letter-spacing: 8px;
+            margin: 20px 0;
+        }
+
+        #intentos {
+            font-size: 22px;
+            margin: 20px 0;
+            color: #00796b;
+        }
+
+        #letrasFallidas {
+            font-size: 22px;
+            margin: 20px 0;
+            color: #d32f2f;
+        }
+
+        #mensaje {
+            font-size: 26px;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #004d40;
+        }
+
+        input {
+            font-size: 24px;
+            padding: 10px;
+            width: 60px;
+            text-align: center;
+            border-radius: 5px;
+            border: 2px solid #004d40;
+            margin-bottom: 20px;
+        }
+
+        button {
+            font-size: 22px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Ahorcado</h1>
+    <div id="palabra">_ _ _ _ _</div>
+    <div id="intentos">Intentos restantes: 6</div>
+    <div id="letrasFallidas"></div>
+    <input type="text" id="letra" maxlength="1" placeholder="Letra">
+    <button onclick="adivinar()">Adivinar</button>
+    <div id="mensaje"></div>
+
+    <script>
+        const palabraSecreta = "javascript";
+        let intentosRestantes = 6;
+        let letrasAdivinadas = [];
+        let letrasFallidas = [];
+
+        function mostrarPalabra() {
+            let palabraMostrar = '';
+            for (let letra of palabraSecreta) {
+                if (letrasAdivinadas.includes(letra)) {
+                    palabraMostrar += letra + ' ';
+                } else {
+                    palabraMostrar += '_ ';
+                }
+            }
+            document.getElementById('palabra').textContent = palabraMostrar.trim();
+        }
+
+        function adivinar() {
+            const letraUsuario = document.getElementById('letra').value.toLowerCase();
+            document.getElementById('letra').value = '';
+
+            if (!/^[a-zñ]$/i.test(letraUsuario)) {
+                alert('Error controlado Pedro, no me pillas 😉. Por favor, pon una letra.');
+                return;
+            }
+
+            if (letrasAdivinadas.includes(letraUsuario) || letrasFallidas.includes(letraUsuario) || letraUsuario ===
+                '') {
+                alert('Ya has adivinado esa letra.');
+                return;
+            }
+
+            if (palabraSecreta.includes(letraUsuario)) {
+                letrasAdivinadas.push(letraUsuario);
+                mostrarPalabra();
+            } else {
+                letrasFallidas.push(letraUsuario);
+                intentosRestantes--;
+            }
+
+            document.getElementById('intentos').textContent = `Intentos restantes: ${intentosRestantes}`;
+            document.getElementById('letrasFallidas').textContent = `Letras fallidas: ${letrasFallidas.join(', ')}`;
+
+            if (intentosRestantes === 0) {
+                document.getElementById('mensaje').textContent = `Perdiste, la palabra era "${palabraSecreta}".`;
+                document.getElementById('letra').disabled = true;
+            } else if (!document.getElementById('palabra').textContent.includes('_')) {
+                document.getElementById('mensaje').textContent = '¡Has adivinado la palabra!';
+                document.getElementById('letra').disabled = true;
+            }
+        }
+
+        mostrarPalabra();
+    </script>
+</body>
+
+</html>

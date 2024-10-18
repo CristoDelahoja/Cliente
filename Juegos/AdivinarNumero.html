@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Adivinanza de un Número</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            width: 100px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #mensaje {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        .correcto {
+            color: green;
+            font-weight: bold;
+        }
+
+        .alto {
+            color: red;
+        }
+
+        .bajo {
+            color: orange;
+        }
+
+        #intentos {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Juego de Adivinanza de un Número</h1>
+    <p>Adivina un número entre 1 y 100:</p>
+    <input type="number" id="numero" min="1" max="100">
+    <button onclick="adivinar()">Comprobar</button>
+    <div id="mensaje"></div>
+    <div id="intentos"></div>
+
+    <script>
+        let numeroSecreto = Math.floor(Math.random() * 100) + 1;
+        let intentos = 0;
+
+        function adivinar() {
+            const numeroUsuario = parseInt(document.getElementById('numero').value);
+            const mensaje = document.getElementById('mensaje');
+            const intentosDiv = document.getElementById('intentos');
+            intentos++;
+            if (numeroUsuario === numeroSecreto) {
+                mensaje.textContent = 'Has adivinado el número.';
+                mensaje.className = 'correcto';
+                intentosDiv.textContent = `Número de intentos: ${intentos}`;
+            } else if (numeroUsuario > numeroSecreto) {
+                mensaje.textContent = 'Demasiado alto. Inténtalo de nuevo.';
+                mensaje.className = 'alto';
+            } else if (numeroUsuario < numeroSecreto) {
+                mensaje.textContent = 'Demasiado bajo. Inténtalo de nuevo.';
+                mensaje.className = 'bajo';
+            } else {
+                mensaje.textContent = 'Por favor, pon un número válido.';
+                mensaje.className = '';
+            }
+        }
+    </script>
+</body>
+
+</html>
