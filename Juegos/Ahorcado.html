@@ -69,12 +69,21 @@
         button:hover {
             background-color: #004d40;
         }
+
+        #ahorcado {
+            font-family: monospace;
+            white-space: pre;
+            font-size: 18px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 
 <body>
     <h1>Ahorcado</h1>
-    <div id="palabra">_ _ _ _ _</div>
+    <div id="ahorcado">
+    </div>
+    <div id="palabra">_ _ _ _ _ _ _ _ _ _</div>
     <div id="intentos">Intentos restantes: 6</div>
     <div id="letrasFallidas"></div>
     <input type="text" id="letra" maxlength="1" placeholder="Letra">
@@ -86,18 +95,63 @@
         let intentosRestantes = 6;
         let letrasAdivinadas = [];
         let letrasFallidas = [];
-
-        function mostrarPalabra() {
-            let palabraMostrar = '';
-            for (let letra of palabraSecreta) {
-                if (letrasAdivinadas.includes(letra)) {
-                    palabraMostrar += letra + ' ';
-                } else {
-                    palabraMostrar += '_ ';
-                }
-            }
-            document.getElementById('palabra').textContent = palabraMostrar.trim();
-        }
+        const dibujosAhorcado = [`
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+`, `
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+`, `
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+`, `
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========
+`, `
+  +---+
+  |   |
+  O   |
+ /|\\\  |
+      |
+      |
+=========
+`, `
+  +---+
+  |   |
+  O   |
+ /|\\\  |
+ /    |
+      |
+=========
+`, `
+  +---+
+  |   |
+  O   |
+ /|\\\  |
+ / \\\  |
+      |
+=========
+`];
 
         function adivinar() {
             const letraUsuario = document.getElementById('letra').value.toLowerCase();
@@ -108,9 +162,8 @@
                 return;
             }
 
-            if (letrasAdivinadas.includes(letraUsuario) || letrasFallidas.includes(letraUsuario) || letraUsuario ===
-                '') {
-                alert('Ya has adivinado esa letra.');
+            if (letrasAdivinadas.includes(letraUsuario) || letrasFallidas.includes(letraUsuario)) {
+                alert('Que no Pedro que no me pillas 😂 ya has probado a adivinar esa letra.');
                 return;
             }
 
@@ -120,6 +173,7 @@
             } else {
                 letrasFallidas.push(letraUsuario);
                 intentosRestantes--;
+                actualizarAhorcado();
             }
 
             document.getElementById('intentos').textContent = `Intentos restantes: ${intentosRestantes}`;
@@ -134,7 +188,24 @@
             }
         }
 
+        function mostrarPalabra() {
+            let palabraMostrar = '';
+            for (let letra of palabraSecreta) {
+                if (letrasAdivinadas.includes(letra)) {
+                    palabraMostrar += letra + ' ';
+                } else {
+                    palabraMostrar += '_ ';
+                }
+            }
+            document.getElementById('palabra').textContent = palabraMostrar.trim();
+        }
+
+        function actualizarAhorcado() {
+            document.getElementById('ahorcado').textContent = dibujosAhorcado[6 - intentosRestantes];
+        }
+
         mostrarPalabra();
+        actualizarAhorcado();
     </script>
 </body>
 
