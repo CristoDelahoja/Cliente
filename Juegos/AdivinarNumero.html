@@ -78,38 +78,63 @@
 </head>
 
 <body>
-    <h1>Juego de Adivinanza de un Número</h1>
+    <h1>Juego de Adivinanza de un Número</h1> <!-- Encabezado principal del juego -->
     <p>Adivina un número entre 1 y 100:</p>
     <input type="number" id="numero" min="1" max="100">
-    <button onclick="adivinar()">Comprobar</button>
-    <div id="mensaje"></div>
-    <div id="intentos"></div>
+    <!-- Campo de entrada numérica -->
+    <button onclick="adivinar()">Comprobar</button> <!-- Botón que llama a la función "adivinar" -->
+    <div id="mensaje"></div> <!-- Área para mostrar mensajes como "Demasiado alto" o "Correcto" -->
+    <div id="intentos"></div> <!-- Área donde se mostrará el número de intentos -->
 
     <script>
+        // Genera un número aleatorio entre 1 y 100
         let numeroSecreto = Math.floor(Math.random() * 100) + 1;
+        // Inicializa el contador de intentos
         let intentos = 0;
 
+        // Función que se ejecuta cuando el usuario hace clic en el botón "Comprobar"
         function adivinar() {
+            // Toma el valor del usuario en el campo de entrada y lo convierte a un número entero
             const numeroUsuario = parseInt(document.getElementById('numero').value);
+            // Referencia al elemento donde se mostrará el mensaje de resultado
             const mensaje = document.getElementById('mensaje');
+            // Referencia al elemento donde se mostrará el número de intentos realizados
             const intentosDiv = document.getElementById('intentos');
+
+            // Incrementa el contador de intentos cada vez que el usuario intenta adivinar
             intentos++;
+
+            // Compara el número del usuario con el número secreto
             if (numeroUsuario === numeroSecreto) {
+                // Si el usuario adivina correctamente, muestra un mensaje de éxito
                 mensaje.textContent = 'Has adivinado el número.';
+                // Asigna la clase "correcto" al mensaje para que cambie su estilo
                 mensaje.className = 'correcto';
+                // Muestra el número de intentos realizados en el div correspondiente
                 intentosDiv.textContent = `Número de intentos: ${intentos}`;
-            } else if (numeroUsuario > numeroSecreto) {
+            }
+            // Si el número del usuario es mayor que el número secreto,
+            else if (numeroUsuario > numeroSecreto) {
+                // Muestra un mensaje indicando que el número es demasiado alto
                 mensaje.textContent = 'Demasiado alto. Inténtalo de nuevo.';
+                // Asigna la clase "alto" al mensaje para cambiar su estilo
                 mensaje.className = 'alto';
-            } else if (numeroUsuario < numeroSecreto) {
+            }
+            // Si el número del usuario es menor que el número secreto,
+            else if (numeroUsuario < numeroSecreto) {
+                // Muestra un mensaje indicando que el número es demasiado bajo
                 mensaje.textContent = 'Demasiado bajo. Inténtalo de nuevo.';
+                // Asigna la clase "bajo" al mensaje para cambiar su estilo
                 mensaje.className = 'bajo';
-            } else {
+            }
+            // Si el valor no es un número válido,
+            else {
+                // Muestra un mensaje de error indicando que se debe poner un número válido
                 mensaje.textContent = 'Pon un número válido.';
-                mensaje.className = '';
             }
         }
     </script>
+
 </body>
 
 </html>

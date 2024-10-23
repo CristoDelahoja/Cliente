@@ -60,43 +60,71 @@
 
 <body>
     <h1>Piedra, Papel o Tijeras</h1>
+    <!-- Encabezado principal del juego -->
+
     <div class="opciones">
+        <!-- Contenedor para las opciones de juego -->
         <div class="opcion" onclick="jugar('piedra')">🪨</div>
+        <!-- Opción de piedra, que llama a la función jugar con 'piedra' al hacer clic -->
         <div class="opcion" onclick="jugar('papel')">📄</div>
+        <!-- Opción de papel, que llama a la función jugar con 'papel' al hacer clic -->
         <div class="opcion" onclick="jugar('tijeras')">✂️</div>
+        <!-- Opción de tijeras, que llama a la función jugar con 'tijeras' al hacer clic -->
     </div>
+
     <div id="resultado"></div>
+    <!-- Div donde se mostrará el resultado del juego -->
+
     <div id="elecciones"></div>
+    <!-- Div donde se mostrarán las elecciones del jugador y la máquina -->
 
     <script>
+        // Función principal que se ejecuta cuando el usuario selecciona una opción
         function jugar(opcionJugador) {
+            // Array con las tres opciones posibles: piedra, papel, y tijeras
             const opciones = ['piedra', 'papel', 'tijeras'];
+            // La opción de la máquina se elige aleatoriamente usando Math.random() y Math.floor()
             const opcionMaquina = opciones[Math.floor(Math.random() * opciones.length)];
+            // Variables para almacenar el resultado del juego y el mensaje final
             let resultado = '';
             let mensaje = '';
 
+            // Compara la elección del jugador con la de la máquina para determinar el resultado
             if (opcionJugador === opcionMaquina) {
+                // Si ambos eligen la misma opción, es un empate
                 resultado = 'Empate';
+                // El mensaje indica que los dos eligieron la misma opción
                 mensaje =
                     `Los dos habéis elegido ${opcionMaquina === 'piedra' ? '🪨' : opcionMaquina === 'papel' ? '📄' : '✂️'}`;
-            } else if (
-                (opcionJugador === 'piedra' && opcionMaquina === 'tijeras') ||
-                (opcionJugador === 'papel' && opcionMaquina === 'piedra') ||
-                (opcionJugador === 'tijeras' && opcionMaquina === 'papel')
+            }
+            // Condiciones para determinar si el jugador gana
+            else if (
+                (opcionJugador === 'piedra' && opcionMaquina === 'tijeras') || // Piedra vence a tijeras
+                (opcionJugador === 'papel' && opcionMaquina === 'piedra') || // Papel vence a piedra
+                (opcionJugador === 'tijeras' && opcionMaquina === 'papel') // Tijeras vence a papel
             ) {
+                // Si el jugador gana, el resultado es "Victoria"
                 resultado = 'Victoria';
+                // El mensaje muestra la jugada ganadora del jugador contra la máquina, usando emojis para representar las elecciones
                 mensaje =
                     `¡Ganaste! 💪, ${opcionJugador === 'piedra' ? '🪨' : opcionJugador === 'papel' ? '📄' : '✂️'} vence a ${opcionMaquina === 'piedra' ? '🪨' : opcionMaquina === 'papel' ? '📄' : '✂️'}`;
-            } else {
+            }
+            // Si ninguna de las condiciones anteriores se cumple, el jugador pierde
+            else {
+                // El resultado es "Derrota"
                 resultado = 'Derrota';
+                // El mensaje muestra la jugada ganadora de la máquina contra el jugador
                 mensaje =
                     `Perdiste 😢, ${opcionMaquina === 'piedra' ? '🪨' : opcionMaquina === 'papel' ? '📄' : '✂️'} vence a ${opcionJugador === 'piedra' ? '🪨' : opcionJugador === 'papel' ? '📄' : '✂️'}`;
             }
 
+            // Actualiza el contenido del elemento con id 'resultado' para mostrar si el jugador ganó, perdió o empató
             document.getElementById('resultado').textContent = resultado;
+            // Actualiza el contenido del elemento con id 'elecciones' para mostrar las elecciones de la máquina y del jugador
             document.getElementById('elecciones').textContent = mensaje;
         }
     </script>
+
 </body>
 
 </html>

@@ -81,20 +81,36 @@
 
 <body>
     <h1>Ahorcado</h1>
+    <!-- Encabezado principal del juego -->
+
     <div id="ahorcado">
     </div>
+    <!-- Div donde se mostrará el dibujo del ahorcado -->
+
     <div id="palabra">_ _ _ _ _ _ _ _ _ _</div>
+    <!-- Div que muestra la palabra oculta con guiones bajos -->
+
     <div id="intentos">Intentos restantes: 6</div>
+    <!-- Div que muestra cuántos intentos quedan -->
+
     <div id="letrasFallidas"></div>
+    <!-- Div que mostrará las letras fallidas -->
+
     <input type="text" id="letra" maxlength="1" placeholder="Letra">
+    <!-- Campo de entrada para que el jugador escriba una letra -->
+
     <button onclick="adivinar()">Adivinar</button>
+    <!-- Botón que ejecuta la función "adivinar()" -->
+
     <div id="mensaje"></div>
+    <!-- Div que mostrará mensajes de resultado del juego -->
 
     <script>
-        const palabraSecreta = "javascript";
-        let intentosRestantes = 6;
-        let letrasAdivinadas = [];
-        let letrasFallidas = [];
+        const palabraSecreta = "javascript"; // La palabra que se debe adivinar
+        let intentosRestantes = 6; // Número de intentos permitidos
+        let letrasAdivinadas = []; // Array para almacenar las letras adivinadas
+        let letrasFallidas = []; // Array para almacenar las letras fallidas
+        // Dibujos del ahorcado que se mostrarán en función de los intentos restantes
         const dibujosAhorcado = [`
   +---+
   |   |
@@ -102,110 +118,112 @@
       |
       |
       |
-=========
-`, `
+=========`, `
   +---+
   |   |
   O   |
       |
       |
       |
-=========
-`, `
+=========`, `
   +---+
   |   |
   O   |
   |   |
       |
       |
-=========
-`, `
+=========`, `
   +---+
   |   |
   O   |
  /|   |
       |
       |
-=========
-`, `
+=========`, `
   +---+
   |   |
   O   |
- /|\\\  |
+ /|\\  |
       |
       |
-=========
-`, `
+=========`, `
   +---+
   |   |
   O   |
- /|\\\  |
+ /|\\  |
  /    |
       |
-=========
-`, `
+=========`, `
   +---+
   |   |
   O   |
- /|\\\  |
- / \\\  |
+ /|\\  |
+ / \\  |
       |
-=========
-`];
+=========`];
 
         function adivinar() {
             const letraUsuario = document.getElementById('letra').value.toLowerCase();
+            // Convierte la letra puesta a minúsculas
             document.getElementById('letra').value = '';
+            // Limpia el campo de entrada
 
+            // Verifica si el input es una letra válida
             if (!/^[a-zñ]$/i.test(letraUsuario)) {
                 alert('Error controlado Pedro, no me pillas 😉. Por favor, pon una letra.');
-                return;
+                return; // Sale de la función si no es válida
             }
 
+            // Verifica si la letra ya ha sido adivinada o fallida
             if (letrasAdivinadas.includes(letraUsuario) || letrasFallidas.includes(letraUsuario)) {
                 alert('Que no Pedro que no me pillas 😂 ya has probado a adivinar esa letra.');
-                return;
+                return; // Sale de la función si la letra ya fue probada
             }
 
+            // Verifica si la letra está en la palabra secreta
             if (palabraSecreta.includes(letraUsuario)) {
-                letrasAdivinadas.push(letraUsuario);
-                mostrarPalabra();
+                letrasAdivinadas.push(letraUsuario); // Agrega la letra adivinada al array
+                mostrarPalabra(); // Llama a la función para mostrar la palabra actualizada
             } else {
-                letrasFallidas.push(letraUsuario);
-                intentosRestantes--;
-                actualizarAhorcado();
+                letrasFallidas.push(letraUsuario); // Agrega la letra fallida al array
+                intentosRestantes--; // Reduce el número de intentos restantes
+                actualizarAhorcado(); // Llama a la función para actualizar el dibujo del ahorcado
             }
 
+            // Actualiza el contenido de intentos restantes y letras fallidas
             document.getElementById('intentos').textContent = `Intentos restantes: ${intentosRestantes}`;
             document.getElementById('letrasFallidas').textContent = `Letras fallidas: ${letrasFallidas.join(', ')}`;
 
+            // Mensaje final en caso de perder o ganar
             if (intentosRestantes === 0) {
                 document.getElementById('mensaje').textContent = `Perdiste, la palabra era "${palabraSecreta}".`;
-                document.getElementById('letra').disabled = true;
+                document.getElementById('letra').disabled = true; // El campo de entrada deja de funcionar
             } else if (!document.getElementById('palabra').textContent.includes('_')) {
                 document.getElementById('mensaje').textContent = '¡Has adivinado la palabra!';
-                document.getElementById('letra').disabled = true;
+                document.getElementById('letra').disabled = true; // El campo de entrada deja de funcionar
             }
         }
 
         function mostrarPalabra() {
-            let palabraMostrar = '';
+            let palabraMostrar = ''; // Variable para almacenar la representación de la palabra
+            // Itera sobre cada letra de la palabra secreta para comprobar si se ha adivinado
             for (let letra of palabraSecreta) {
                 if (letrasAdivinadas.includes(letra)) {
-                    palabraMostrar += letra + ' ';
+                    palabraMostrar += letra + ' '; // Si se adivinó, añade la letra
                 } else {
-                    palabraMostrar += '_ ';
+                    palabraMostrar += '_ '; // Si no, añade un guion bajo
                 }
             }
-            document.getElementById('palabra').textContent = palabraMostrar.trim();
+            document.getElementById('palabra').textContent = palabraMostrar.trim(); // Muestra la palabra en el div
         }
 
         function actualizarAhorcado() {
             document.getElementById('ahorcado').textContent = dibujosAhorcado[6 - intentosRestantes];
+            // Actualiza el dibujo del ahorcado
         }
 
-        mostrarPalabra();
-        actualizarAhorcado();
+        mostrarPalabra(); // Inicializa la visualización de la palabra
+        actualizarAhorcado(); // Inicializa el dibujo del ahorcado
     </script>
 </body>
 
