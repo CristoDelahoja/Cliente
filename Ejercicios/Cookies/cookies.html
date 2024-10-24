@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cookies</title>
+    <script>
+        // Función para crear una cookie
+        function crearCookie(nombre, valor, dias) {
+            let fecha = new Date();
+            fecha.setTime(fecha.getTime() + (dias * 24 * 60 * 60 * 1000));
+            let expiracion = "expires=" + fecha.toUTCString();
+            document.cookie = nombre + "=" + valor + ";" + expiracion + "; path=/";
+        }
+
+        // Función para obtener una cookie
+        function obtenerCookie(nombre) {
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i].trim();
+                if (cookie.indexOf(nombre + '=') === 0) {
+                    return cookie.substring((nombre + '=').length, cookie.length);
+                }
+            }
+            return null;
+        }
+
+        // Crear una cookie y mostrar su valor
+        function gestionarCookies() {
+            crearCookie('usuario', 'Cristóbal', 7);
+            let usuario = obtenerCookie('usuario');
+            alert('El usuario almacenado es: ' + usuario);
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="gestionarCookies()">Crear y Obtener Cookie</button>
+</body>
+
+</html>

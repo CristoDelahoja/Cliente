@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Expiration</title>
+</head>
+
+<body>
+    <script>
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(18, 25, 0, 0);
+        document.cookie = "miCookie=valor; expires=" + tomorrow.toUTCString() + "; path=/";
+    </script>
+</body>
+
+</html>
