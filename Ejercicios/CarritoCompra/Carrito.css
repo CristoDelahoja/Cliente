@@ -1,0 +1,134 @@
+body {
+    font-family: 'Noto Serif JP', serif;
+    background-color: #f0e5cf;
+    /*background-image: url("https://img.freepik.com/fotos-premium/arbol-sakura-aurora-multicolor-noche-mt-fuji-pintura-digital-ia-generativa_1165887-5774.jpg?semt=ais_hybrid");*/
+    background-size: cover;
+    background-position: center;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+h1 {
+    color: #b02a1f;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #b02a1f;
+    padding-bottom: 10px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.producto {
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 180px;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s;
+}
+
+.producto:hover {
+    transform: scale(1.05);
+}
+
+.producto img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.producto h2 {
+    color: #b02a1f;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.producto p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 10px 0 15px;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #b02a1f;
+}
+
+.carrito {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carrito h2 {
+    color: #b02a1f;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+#carrito-lista {
+    list-style: none;
+    padding: 0;
+}
+
+#carrito-lista li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#carrito-lista li:last-child {
+    border-bottom: none;
+}
+
+button#vaciar-carrito {
+    background-color: #b02a1f;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button#vaciar-carrito:hover {
+    background-color: #333;
+}

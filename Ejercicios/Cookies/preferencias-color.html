@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferencias de Color</title>
+    <style>
+        :root {
+            --white: #fff5f5;
+            --black: #070707;
+            --soft-red: #ffc5c5;
+            --soft-blue: #cce5ff;
+            --soft-green: #c6efce;
+            --soft-yellow: #ffffcc;
+            --soft-purple: #e6e6fa;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.5s ease;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: var(--white);
+            border: 2px solid var(--black);
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        select:hover {
+            border-color: var(--soft-blue);
+        }
+
+        option {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Elige tu color de fondo favorito</h1>
+    <select id="colorSelect" onchange="guardarPreferenciaColor()">
+        <option value="#fff5f5">Blanco</option>
+        <option value="#ffc5c5">Rojo Suave</option>
+        <option value="#cce5ff">Azul Suave</option>
+        <option value="#c6efce">Verde Suave</option>
+        <option value="#ffffcc">Amarillo Suave</option>
+        <option value="#e6e6fa">Púrpura Suave</option>
+    </select>
+
+    <script>
+        // Función para crear o actualizar una cookie
+        // Recibe el nombre de la cookie, su valor, y el número de días que permanecerá activa.
+        function setCookie(name, value, days) {
+            // Creamos un objeto de fecha para gestionar la expiración de la cookie.
+            const d = new Date();
+
+            // Calculamos el tiempo de expiración sumando los días al tiempo actual.
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000)); // Convertimos días a milisegundos.
+
+            // Establecemos la cookie en el documento. Incluimos el nombre, valor, la fecha de expiración
+            // en formato UTC, y el path para que sea válida en todo el sitio web ("/").
+            document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=/`;
+        }
+
+        // Función para obtener el valor de una cookie por su nombre
+        // Toma el nombre de la cookie y devuelve su valor si existe.
+        function getCookie(name) {
+            // Las cookies en el documento están separadas por ";"
+            const cookies = document.cookie.split(';');
+
+            // Iteramos a través de todas las cookies almacenadas
+            for (let cookie of cookies) {
+                // Eliminamos espacios innecesarios al inicio de cada cadena
+                let c = cookie.trim();
+
+                // Si la cookie empieza con el nombre que buscamos, devolvemos su valor
+                if (c.startsWith(`${name}=`)) return c.substring(name.length + 1);
+            }
+
+            // Si no encontramos la cookie, devolvemos null
+            return null;
+        }
+
+        // Función para aplicar la preferencia de color de fondo desde las cookies
+        // Si existe una cookie con el color guardado, cambia el color de fondo de la página.
+        function aplicarPreferenciasColor() {
+            // Obtenemos el valor de la cookie 'colorFondo'
+            const colorPreferido = getCookie("colorFondo");
+
+            // Si la cookie existe (es decir, si el usuario ha guardado una preferencia de color),
+            // aplicamos ese color al fondo de la página.
+            if (colorPreferido) {
+                // Cambiamos el color de fondo de la página al valor guardado en la cookie
+                document.body.style.backgroundColor = colorPreferido;
+
+                // También actualizamos el valor del selector de color en la página para que coincida
+                document.getElementById('colorSelect').value = colorPreferido;
+            }
+        }
+
+        // Función para guardar la preferencia de color seleccionada por el usuario
+        // Guarda el color seleccionado en una cookie y actualiza el fondo de la página.
+        function guardarPreferenciaColor() {
+            // Obtenemos el valor seleccionado en el campo de selección de color
+            const color = document.getElementById('colorSelect').value;
+
+            // Guardamos este valor en una cookie llamada "colorFondo", con una duración de 30 días
+            setCookie("colorFondo", color, 30);
+
+            // Aplicamos el color de fondo seleccionado a la página
+            document.body.style.backgroundColor = color;
+        }
+
+        // Evento que se ejecuta cuando la página se carga
+        // Al cargar la página, verificamos si hay una preferencia de color guardada en cookies
+        // y aplicamos ese color automáticamente.
+        window.onload = aplicarPreferenciasColor;
+    </script>
+</body>
+
+</html>

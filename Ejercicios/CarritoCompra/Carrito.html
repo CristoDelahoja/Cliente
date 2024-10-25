@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="Carrito.css">
+</head>
+
+<body>
+    <h1>Carrito de Compras</h1>
+
+    <div class="productos">
+
+        <div class="producto" data-id="1">
+            <img src="https://www.myjapanesehome.com/cdn/shop/products/product-image-688414888.jpg?v=1618334114&width=1445"
+                alt="Kimono">
+            <h2>Kimono</h2>
+            <p>Vestimenta tradicional japonesa utilizada en festivales y ocasiones especiales.</p>
+            <button onclick="agregarAlCarrito(1, 'Kimono', 150)">Agregar al carrito</button>
+        </div>
+
+        <div class="producto" data-id="2">
+            <img src="https://ryokucha.fr/img/p/8/1/2/8/5/81285.jpg" alt="Taza de Cerámica Japonesa">
+            <h2>Taza de Cerámica Japonesa</h2>
+            <p>Hermosa taza de cerámica hecha a mano, ideal para té.</p>
+            <button onclick="agregarAlCarrito(2, 'Taza de Cerámica Japonesa', 50)">Agregar al carrito</button>
+        </div>
+
+        <div class="producto" data-id="3">
+            <img src="https://thejapaneseteahub.es/cdn/shop/files/Palillos_Neko2.webp?v=1707332410&width=1445"
+                alt="Set de Hashis">
+            <h2>Set de Hashis (Palillos)</h2>
+            <p>Palillos tradicionales japoneses de madera para comidas típicas.</p>
+            <button onclick="agregarAlCarrito(3, 'Set de Hashis', 15)">Agregar al carrito</button>
+        </div>
+
+        <div class="producto" data-id="4">
+            <img src="https://content.elmueble.com/medio/2023/04/20/maneki-neko_ee374242_230420191534_900x900.jpg"
+                alt="Maneki-neko">
+            <h2>Maneki-neko</h2>
+            <p>Figura de gato de la suerte que trae fortuna y prosperidad.</p>
+            <button onclick="agregarAlCarrito(4, 'Maneki-neko', 10)">Agregar al carrito</button>
+        </div>
+    </div>
+
+    <div class="carrito">
+        <h2>Carrito de Compras</h2>
+        <ul id="carrito-lista"></ul>
+        <button onclick="vaciarCarrito()">Vaciar Carrito</button>
+    </div>
+
+    <script src="Carrito.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Cookies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5rem;
+        }
+
+        form {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px 2px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Formulario de Usuario</h1>
+
+    <form id="userForm">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="country">País:</label>
+        <select id="country" name="country" required>
+            <option value="">Selecciona tu país</option>
+            <option value="España">España</option>
+            <option value="México">México</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Chile">Chile</option>
+            <option value="Colombia">Colombia</option>
+        </select>
+
+        <button type="submit">Guardar Información</button>
+    </form>
+
+    <div class="message" id="message"></div>
+
+    <script>
+        // Función para guardar cookies
+        // Esta función crea o actualiza una cookie con un nombre, valor, y duración (en días).
+        function setCookie(name, value, days) {
+            // Creamos un objeto de fecha para definir el tiempo de expiración de la cookie.
+            const d = new Date();
+
+            // Calculamos la fecha de expiración sumando el número de días al tiempo actual.
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+
+            // Establecemos la cookie en el documento, con formato clave=valor, una fecha de expiración,
+            // y el path para que sea válida en toda la página web ("/").
+            document.cookie = `${name}=${value}; expires=${d.toUTCString()}; path=/`;
+        }
+
+        // Función para obtener el valor de una cookie específica
+        // Toma el nombre de la cookie y busca su valor entre todas las cookies almacenadas.
+        function getCookie(name) {
+            // Las cookies están almacenadas en un solo string y separadas por ";"
+            const cookies = document.cookie.split(';');
+
+            // Iteramos sobre todas las cookies almacenadas
+            for (let cookie of cookies) {
+                // Eliminamos los espacios extra que pueda haber al inicio de la cadena.
+                let c = cookie.trim();
+
+                // Comprobamos si el nombre de la cookie es el que buscamos
+                if (c.startsWith(`${name}=`)) {
+                    // Devolvemos el valor de la cookie (el contenido después del "=").
+                    return c.substring(name.length + 1);
+                }
+            }
+
+            // Si no se encuentra la cookie, devolvemos null.
+            return null;
+        }
+
+        // Función para llenar automáticamente un formulario con datos guardados en cookies.
+        // Llama a la función getCookie para cada campo (nombre, email, país) y si hay valores guardados,
+        // los asigna a los campos del formulario en la página.
+        function llenarFormulario() {
+            // Obtenemos las cookies guardadas para 'name', 'email', y 'country'.
+            const name = getCookie('name');
+            const email = getCookie('email');
+            const country = getCookie('country');
+
+            // Si existen cookies con valores guardados, llenamos los campos correspondientes del formulario HTML.
+            if (name) document.getElementById('name').value = name;
+            if (email) document.getElementById('email').value = email;
+            if (country) document.getElementById('country').value = country;
+        }
+
+        // Evento que se ejecuta cuando el formulario es enviado.
+        // En lugar de enviar los datos al servidor, esta función los guarda en cookies.
+        document.getElementById('userForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita el envío real del formulario para manejarlo con JavaScript.
+
+            // Obtenemos los valores de los campos del formulario (nombre, email, país).
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const country = document.getElementById('country').value;
+
+            // Guardamos estos valores en cookies, con una duración de 30 días.
+            setCookie('name', name, 30);
+            setCookie('email', email, 30);
+            setCookie('country', country, 30);
+
+            // Mostramos un mensaje en la página confirmando que la información se ha guardado.
+            document.getElementById('message').innerText = 'Información guardada correctamente.';
+        });
+
+        // Al cargar la página, llenamos el formulario automáticamente si hay cookies guardadas
+        // usando la función llenarFormulario.
+        window.onload = llenarFormulario;
+    </script>
+</body>
+
+</html>
