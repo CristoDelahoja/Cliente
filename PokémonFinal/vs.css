@@ -1,0 +1,98 @@
+/* vs.css */
+
+/* Body */
+body {
+    background-image: url('https://wallpapercave.com/wp/wp4924575.jpg');  /* Fondo relacionado con Pokémon */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Pokemon', sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    text-align: center;
+    background-attachment: fixed;
+}
+
+/* Título */
+h1 {
+    font-size: 4rem;
+    color: #ffcc00;  /* Color dorado para resaltar */
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 50px;
+}
+
+/* Estilo para el contenedor del enfrentamiento */
+#player, #opponent {
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+#player {
+    background-color: rgba(0, 128, 0, 0.7); /* Fondo verde para el jugador */
+}
+
+#opponent {
+    background-color: rgba(255, 0, 0, 0.7); /* Fondo rojo para el oponente */
+}
+
+/* Efecto de hover para los Pokémon */
+#player:hover, #opponent:hover {
+    transform: scale(1.1);  /* Efecto de zoom al hacer hover */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Imagen del Pokémon */
+#player img, #opponent img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Botón de iniciar combate */
+button {
+    background-color: #ff5733;  /* Color cálido para el botón */
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 40px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #c0392b;  /* Oscurece el color al pasar el mouse */
+    transform: scale(1.05);  /* Efecto de zoom al hacer hover */
+}
+
+/* Animación para la transición de los Pokémon */
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Aplicación de la animación a los contenedores de los Pokémon */
+#player, #opponent {
+    animation: appear 1s ease-out;
+}

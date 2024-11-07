@@ -1,0 +1,136 @@
+/* combate.css */
+
+/* Body */
+body {
+    background-image: url('https://wallpapercave.com/wp/wp4924575.jpg');  /* Fondo épico relacionado con Pokémon */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Pokemon', sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    text-align: center;
+    background-attachment: fixed;
+}
+
+/* Título */
+h1 {
+    font-size: 4rem;
+    color: #ffcc00;  /* Color dorado para resaltar */
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 50px;
+}
+
+/* Contenedor de estadísticas del jugador y oponente */
+#player-stats, #opponent-stats {
+    width: 300px;
+    height: 350px;
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+
+/* Jugador */
+#player-stats {
+    background-color: rgba(0, 128, 0, 0.7);  /* Fondo verde para el jugador */
+    color: white;
+}
+
+/* Oponente */
+#opponent-stats {
+    background-color: rgba(255, 0, 0, 0.7);  /* Fondo rojo para el oponente */
+    color: white;
+}
+
+/* Estilo para las imágenes de los Pokémon en las estadísticas */
+#player-stats img, #opponent-stats img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Texto de las estadísticas */
+#player-stats h3, #opponent-stats h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Contenedor de los mensajes de batalla */
+#battle-log {
+    width: 80%;
+    height: 200px;
+    margin-top: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+    color: white;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+/* Botón de ataque */
+#attack-button {
+    background-color: #ff5733;  /* Rojo brillante para el botón */
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 40px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#attack-button:hover {
+    background-color: #c0392b;  /* Rojo más oscuro al hacer hover */
+    transform: scale(1.1);  /* Efecto de zoom al hacer hover */
+}
+
+/* Animación para el ataque */
+@keyframes attackAnimation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Aplicación de la animación al botón de ataque */
+#attack-button {
+    animation: attackAnimation 1s ease;
+}
+
+/* Efecto de transición de las estadísticas */
+@keyframes statsTransition {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#player-stats, #opponent-stats {
+    animation: statsTransition 1s ease-out;
+}
