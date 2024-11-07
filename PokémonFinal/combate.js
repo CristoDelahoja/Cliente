@@ -14,24 +14,41 @@ let isPlayerTurn = true;
 let isDefending = false; // Variable para saber si el jugador está defendiendo
 
 function updateStats() {
+    // Función para obtener el color según el porcentaje de vida
+    function getHealthColor(percentage) {
+        if (percentage <= 0) {
+            return '#000000';  // Negro si la vida es 0 o menor
+        } else if (percentage >= 51) {
+            return '#00ff00';  // Verde
+        } else if (percentage >= 11) {
+            return '#ffa500';  // Naranja
+        } else {
+            return '#ff0000';  // Rojo
+        }
+    }
+
+    // Actualiza las estadísticas del jugador
     document.getElementById("player-stats").innerHTML = `
         <h2>${playerPokemon.name}</h2>
         <img src="${playerPokemon.img}" alt="${playerPokemon.name}">
         <p>HP: ${playerPokemon.currentHP} / ${playerPokemon.hp}</p>
+        <div class="hp-bar" id="player-hp-bar">
+            <div class="hp-bar-inner" style="width: ${(playerPokemon.currentHP / playerPokemon.hp) * 100}%; background-color: ${getHealthColor((playerPokemon.currentHP / playerPokemon.hp) * 100)};"></div>
+        </div>
     `;
+    
+    // Actualiza las estadísticas del oponente
     document.getElementById("opponent-stats").innerHTML = `
         <h2>${opponentPokemon.name}</h2>
         <img src="${opponentPokemon.img}" alt="${opponentPokemon.name}">
         <p>HP: ${opponentPokemon.currentHP} / ${opponentPokemon.hp}</p>
+        <div class="hp-bar" id="opponent-hp-bar">
+            <div class="hp-bar-inner" style="width: ${(opponentPokemon.currentHP / opponentPokemon.hp) * 100}%; background-color: ${getHealthColor((opponentPokemon.currentHP / opponentPokemon.hp) * 100)};"></div>
+        </div>
     `;
 }
 
-/**
- * Calcula el daño causado por un ataque.
- * @param {Object} attacker El objeto que contiene la información del atacante (Pokémon).
- * @param {Object} defender El objeto que contiene la información del defensor (Pokémon).
- * @returns {number} El daño causado.
- */
+
 function calculateDamage(attacker, defender) {
     // Calcula el daño base
     const baseDamage = attacker.attack - defender.defense;
@@ -97,11 +114,31 @@ function checkEndCondition() {
     }
 }
 
-// Eventos para los botones de acción
 document.addEventListener("DOMContentLoaded", function () {
+    // Reproducir la música de combate
+    const battleMusic = document.getElementById("battle-music");
+    
+    // Intentar reproducir la música cuando la página cargue
+    battleMusic.play().catch(error => {
+        console.log("No se pudo reproducir la música automáticamente: ", error);
+    });
+
+    // Actualizar las estadísticas de los Pokémon
     updateStats();
 
+    // Configuración de los botones de acción
     document.getElementById("attack-button").onclick = playerTurn;
     document.getElementById("defend-button").onclick = defendPokemon;
     document.getElementById("heal-button").onclick = healPokemon;
+
+    // Control del botón de música (pausar/reanudar)
+    document.getElementById("music-toggle").addEventListener("click", function() {
+        if (battleMusic.paused) {
+            battleMusic.play();
+            this.textContent = "Pausar Música";  // Cambiar texto a "Pausar Música"
+        } else {
+            battleMusic.pause();
+            this.textContent = "Reanudar Música";  // Cambiar texto a "Reanudar Música"
+        }
+    });
 });
