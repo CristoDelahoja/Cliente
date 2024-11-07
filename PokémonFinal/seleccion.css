@@ -1,12 +1,14 @@
-/* seleccion.css */
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
 
 /* Body */
 body {
-    background-image: url('https://wallpapercave.com/wp/wp4924575.jpg');  /* Fondo relacionado con Pokémon */
+    background-image: url('https://wallpapers.com/images/hd/pokemon-black-02wyb460e0jo87w3.jpg');
+    /* Fondo relacionado con Pokémon */
     background-size: cover;
     background-position: center;
-    font-family: 'Pokemon', sans-serif;
-    color: white;
+    color: rgb(0, 0, 0);
+    font-family: 'Pokemon Solid', sans-serif;
+    font-size: medium;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,16 +20,18 @@ body {
 
 /* Título */
 h1 {
-    font-size: 3.5rem;
+    font-size: 4rem;
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
     margin-bottom: 30px;
-    color: #ffcc00;  /* Color dorado para resaltar */
+    color: #ffcc00;
+    /* Color dorado para resaltar */
 }
 
 /* Contenedor de la lista de Pokémon */
 #pokemon-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));  /* Ajuste automático de Pokémon en columnas */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    /* Ajuste automático de Pokémon en columnas */
     gap: 20px;
     padding: 20px;
     max-width: 80%;
@@ -42,7 +46,7 @@ h1 {
 
 /* Estilo para cada Pokémon */
 .pokemon-item {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(64, 226, 229, 0.7);
     border-radius: 10px;
     padding: 15px;
     text-align: center;
@@ -51,7 +55,8 @@ h1 {
 }
 
 .pokemon-item:hover {
-    transform: scale(1.05);  /* Agrandar al hacer hover */
+    transform: scale(1.08);
+    /* Agrandar al hacer hover */
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
 }
 
@@ -65,7 +70,8 @@ h1 {
 
 /* Botón de selección */
 button {
-    background-color: #4caf50;  /* Verde Pokémon */
+    background-color: #4caf50;
+    /* Verde Pokémon */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -76,5 +82,6 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;  /* Verde oscuro al hacer hover */
+    background-color: #1e7e22;
+    /* Verde oscuro al hacer hover */
 }

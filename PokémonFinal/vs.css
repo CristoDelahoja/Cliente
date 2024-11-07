@@ -2,7 +2,7 @@
 
 /* Body */
 body {
-    background-image: url('https://wallpapercave.com/wp/wp4924575.jpg');  /* Fondo relacionado con Pokémon */
+    background-image: url('https://cdn-0001.qstv.on.epicgames.com/kCAKwFVjpCxCcskAiq/image/landscape_comp.jpeg');
     background-size: cover;
     background-position: center;
     font-family: 'Pokemon', sans-serif;
@@ -20,20 +20,21 @@ body {
 /* Título */
 h1 {
     font-size: 4rem;
-    color: #ffcc00;  /* Color dorado para resaltar */
+    color: #ffcc00;
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
     margin-bottom: 50px;
 }
 
 /* Estilo para el contenedor del enfrentamiento */
-#player, #opponent {
-    width: 250px;
-    height: 250px;
+#player,
+#opponent {
+    width: 350px; /* Tamaño de los contenedores */
+    height: 350px; /* Tamaño de los contenedores */
     display: inline-block;
-    margin: 10px;
+    margin: 300px; /* Aumento del margen para separarlos aún más */
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 15px;
-    padding: 10px;
+    padding: 20px;
     text-align: center;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
     transition: transform 0.5s ease, box-shadow 0.5s ease;
@@ -48,15 +49,17 @@ h1 {
 }
 
 /* Efecto de hover para los Pokémon */
-#player:hover, #opponent:hover {
-    transform: scale(1.1);  /* Efecto de zoom al hacer hover */
+#player:hover,
+#opponent:hover {
+    transform: scale(1.1); /* Efecto de zoom al hacer hover */
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 /* Imagen del Pokémon */
-#player img, #opponent img {
-    width: 150px;
-    height: 150px;
+#player img,
+#opponent img {
+    width: 200px; /* Tamaño de las imágenes */
+    height: 200px; /* Tamaño de las imágenes */
     border-radius: 10px;
     margin-bottom: 10px;
     transition: transform 0.3s ease;
@@ -64,7 +67,7 @@ h1 {
 
 /* Botón de iniciar combate */
 button {
-    background-color: #ff5733;  /* Color cálido para el botón */
+    background-color: #ff5733;
     color: white;
     font-size: 1.5rem;
     border: none;
@@ -76,8 +79,8 @@ button {
 }
 
 button:hover {
-    background-color: #c0392b;  /* Oscurece el color al pasar el mouse */
-    transform: scale(1.05);  /* Efecto de zoom al hacer hover */
+    background-color: #c0392b;
+    transform: scale(1.05); /* Efecto de zoom al hacer hover */
 }
 
 /* Animación para la transición de los Pokémon */
@@ -93,6 +96,7 @@ button:hover {
 }
 
 /* Aplicación de la animación a los contenedores de los Pokémon */
-#player, #opponent {
+#player,
+#opponent {
     animation: appear 1s ease-out;
 }

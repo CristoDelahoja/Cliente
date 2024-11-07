@@ -2,7 +2,7 @@
 
 /* Body */
 body {
-    background-image: url('https://wallpapercave.com/wp/wp4924575.jpg');  /* Fondo épico relacionado con Pokémon */
+    background-image: url('https://images.wikidexcdn.net/mwuploads/esssbwiki/thumb/2/2c/latest/20180819065319/Estadio_Pok%C3%A9mon_2_SSBU.jpg/1200px-Estadio_Pok%C3%A9mon_2_SSBU.jpg');
     background-size: cover;
     background-position: center;
     font-family: 'Pokemon', sans-serif;
@@ -20,13 +20,25 @@ body {
 /* Título */
 h1 {
     font-size: 4rem;
-    color: #ffcc00;  /* Color dorado para resaltar */
+    color: #ffcc00;
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
     margin-bottom: 50px;
 }
 
+/* Contenedor general para los Pokémon */
+#battle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* Alineamos los Pokémon hacia abajo */
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 30px;
+}
+
 /* Contenedor de estadísticas del jugador y oponente */
-#player-stats, #opponent-stats {
+#player-stats,
+#opponent-stats {
     width: 300px;
     height: 350px;
     margin: 20px;
@@ -40,18 +52,19 @@ h1 {
 
 /* Jugador */
 #player-stats {
-    background-color: rgba(0, 128, 0, 0.7);  /* Fondo verde para el jugador */
+    background-color: rgba(0, 128, 0, 0.7);
     color: white;
 }
 
 /* Oponente */
 #opponent-stats {
-    background-color: rgba(255, 0, 0, 0.7);  /* Fondo rojo para el oponente */
+    background-color: rgba(255, 0, 0, 0.7);
     color: white;
 }
 
 /* Estilo para las imágenes de los Pokémon en las estadísticas */
-#player-stats img, #opponent-stats img {
+#player-stats img,
+#opponent-stats img {
     width: 120px;
     height: 120px;
     border-radius: 10px;
@@ -59,44 +72,77 @@ h1 {
 }
 
 /* Texto de las estadísticas */
-#player-stats h3, #opponent-stats h3 {
+#player-stats h3,
+#opponent-stats h3 {
     font-size: 1.5rem;
     margin: 10px 0;
     font-weight: bold;
 }
 
-/* Contenedor de los mensajes de batalla */
+/* Estilo para el chat de la batalla (battle log) */
 #battle-log {
     width: 80%;
-    height: 200px;
-    margin-top: 30px;
-    background-color: rgba(0, 0, 0, 0.6);
+    min-height: 250px;
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.8);
     overflow-y: auto;
-    color: white;
+    color: #f1f1f1;
     font-size: 1.2rem;
     text-align: left;
+    font-family: 'Verdana', sans-serif;
+    border: 3px solid #ffcc00;
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+}
+
+/* Estilo para los mensajes del chat */
+#battle-log p {
+    margin: 8px 0;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
+    font-size: 1.1rem;
+}
+
+/* Estilo para el último mensaje (para resaltarlo) */
+#battle-log p:last-child {
+    background-color: rgba(255, 223, 0, 0.6);
+    font-weight: bold;
 }
 
 /* Botón de ataque */
-#attack-button {
-    background-color: #ff5733;  /* Rojo brillante para el botón */
+/* combate.css */
+
+/* Estilo para los botones de acción (Atacar, Defender, Curarse) */
+#action-buttons {
+    margin-top: 30px;
+}
+
+#attack-button,
+#defend-button,
+#heal-button {
+    background-color: #ff5733;
     color: white;
     font-size: 1.5rem;
     border: none;
     padding: 15px 30px;
     border-radius: 10px;
     cursor: pointer;
-    margin-top: 40px;
+    margin: 10px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-#attack-button:hover {
-    background-color: #c0392b;  /* Rojo más oscuro al hacer hover */
-    transform: scale(1.1);  /* Efecto de zoom al hacer hover */
+#attack-button:hover,
+#defend-button:hover,
+#heal-button:hover {
+    background-color: #c0392b;
+    transform: scale(1.1);
 }
+
 
 /* Animación para el ataque */
 @keyframes attackAnimation {
@@ -104,17 +150,18 @@ h1 {
         transform: scale(1);
         opacity: 1;
     }
+
     50% {
         transform: scale(1.2);
         opacity: 0.8;
     }
+
     100% {
         transform: scale(1);
         opacity: 1;
     }
 }
 
-/* Aplicación de la animación al botón de ataque */
 #attack-button {
     animation: attackAnimation 1s ease;
 }
@@ -125,12 +172,14 @@ h1 {
         opacity: 0;
         transform: translateX(-50px);
     }
+
     100% {
         opacity: 1;
         transform: translateX(0);
     }
 }
 
-#player-stats, #opponent-stats {
+#player-stats,
+#opponent-stats {
     animation: statsTransition 1s ease-out;
 }

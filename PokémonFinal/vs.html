@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Pantalla VS</title>
     <link rel="stylesheet" href="vs.css">
     <script type="module" src="vs.js" defer></script>
 </head>
+
 <body>
     <h1>Enfrentamiento VS</h1>
-    <div id="player"></div>
-    <div id="opponent"></div>
+
+    <!-- Contenedor para los Pokémon -->
+    <div id="battle-container">
+        <!-- Contenedor del jugador -->
+        <div id="player">
+            <img src="https://projectpokemon.org/images/normal-sprite/bulbasaur.gif" alt="Bulbasaur">
+            <h3>Bulbasaur</h3>
+        </div>
+
+        <!-- Contenedor del oponente -->
+        <div id="opponent">
+            <img src="https://projectpokemon.org/images/normal-sprite/charmander.gif" alt="Charmander">
+            <h3>Charmander</h3>
+        </div>
+    </div>
+
+    <!-- Botón para iniciar el combate -->
     <button onclick="startBattle()">Iniciar Combate</button>
+
 </body>
+
 </html>

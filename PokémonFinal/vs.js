@@ -20,7 +20,7 @@ function displayVS() {
     `;
 }
 
-window.startBattle = function() {
+window.startBattle = function () {
     window.location.href = "combate.html"; // Redirige a la pantalla de combate
 };
 

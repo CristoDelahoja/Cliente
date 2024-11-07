@@ -1,4 +1,6 @@
-import { pokemons } from './pokemons.js';
+import {
+    pokemons
+} from './pokemons.js';
 
 function setCookie(name, value) {
     document.cookie = `${name}=${JSON.stringify(value)}; path=/`;
@@ -20,7 +22,7 @@ function displayPokemons() {
     });
 }
 
-window.selectPokemon = function(id) {
+window.selectPokemon = function (id) {
     const selectedPokemon = pokemons.find(p => p.id === id);
     setCookie("selectedPokemon", selectedPokemon);
 
