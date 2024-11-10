@@ -1,9 +1,7 @@
 @import url('https://fonts.cdnfonts.com/css/lexend');
 
-/* Body */
 body {
     background-image: url('https://wallpapers.com/images/hd/pokemon-black-02wyb460e0jo87w3.jpg');
-    /* Fondo relacionado con Pokémon */
     background-size: cover;
     background-position: center;
     color: rgb(0, 0, 0);
@@ -18,20 +16,17 @@ body {
     text-align: center;
 }
 
-/* Título */
 h1 {
     font-size: 4rem;
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
     margin-bottom: 30px;
     color: #ffcc00;
-    /* Color dorado para resaltar */
 }
 
 /* Contenedor de la lista de Pokémon */
 #pokemon-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    /* Ajuste automático de Pokémon en columnas */
     gap: 20px;
     padding: 20px;
     max-width: 80%;
@@ -56,7 +51,6 @@ h1 {
 
 .pokemon-item:hover {
     transform: scale(1.08);
-    /* Agrandar al hacer hover */
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
 }
 
@@ -71,7 +65,6 @@ h1 {
 /* Botón de selección */
 button {
     background-color: #4caf50;
-    /* Verde Pokémon */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -83,5 +76,4 @@ button {
 
 button:hover {
     background-color: #1e7e22;
-    /* Verde oscuro al hacer hover */
 }

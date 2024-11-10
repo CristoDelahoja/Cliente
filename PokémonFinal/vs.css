@@ -1,6 +1,3 @@
-/* vs.css */
-
-/* Body */
 body {
     background-image: url('https://cdn-0001.qstv.on.epicgames.com/kCAKwFVjpCxCcskAiq/image/landscape_comp.jpeg');
     background-size: cover;
@@ -17,7 +14,6 @@ body {
     background-attachment: fixed;
 }
 
-/* Título */
 h1 {
     font-size: 4rem;
     color: #ffcc00;
@@ -28,10 +24,10 @@ h1 {
 /* Estilo para el contenedor del enfrentamiento */
 #player,
 #opponent {
-    width: 350px; /* Tamaño de los contenedores */
-    height: 350px; /* Tamaño de los contenedores */
+    width: 350px;
+    height: 350px;
     display: inline-block;
-    margin: 300px; /* Aumento del margen para separarlos aún más */
+    margin: 300px;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 15px;
     padding: 20px;
@@ -41,25 +37,27 @@ h1 {
 }
 
 #player {
-    background-color: rgba(0, 128, 0, 0.7); /* Fondo verde para el jugador */
+    background-color: rgba(0, 110, 255, 0.7);
+    /* Fondo azul para el jugador */
 }
 
 #opponent {
-    background-color: rgba(255, 0, 0, 0.7); /* Fondo rojo para el oponente */
+    background-color: rgba(255, 0, 0, 0.7);
+    /* Fondo rojo para el oponente */
 }
 
 /* Efecto de hover para los Pokémon */
 #player:hover,
 #opponent:hover {
-    transform: scale(1.1); /* Efecto de zoom al hacer hover */
+    transform: scale(1.1);
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 /* Imagen del Pokémon */
 #player img,
 #opponent img {
-    width: 200px; /* Tamaño de las imágenes */
-    height: 200px; /* Tamaño de las imágenes */
+    width: 200px;
+    height: 200px;
     border-radius: 10px;
     margin-bottom: 10px;
     transition: transform 0.3s ease;
@@ -80,7 +78,7 @@ button {
 
 button:hover {
     background-color: #c0392b;
-    transform: scale(1.05); /* Efecto de zoom al hacer hover */
+    transform: scale(1.05);
 }
 
 /* Animación para la transición de los Pokémon */
@@ -89,6 +87,7 @@ button:hover {
         opacity: 0;
         transform: translateY(-50px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);

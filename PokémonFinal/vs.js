@@ -8,6 +8,7 @@ const playerPokemon = getCookie("selectedPokemon");
 const opponentPokemon = getCookie("opponentPokemon");
 
 function displayVS() {
+    // HTML interno
     document.getElementById("player").innerHTML = `
         <h2>${playerPokemon.name}</h2>
         <img src="${playerPokemon.img}" alt="${playerPokemon.name}">

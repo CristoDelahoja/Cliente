@@ -11,6 +11,7 @@ function displayPokemons() {
     pokemons.forEach(pokemon => {
         const pokemonItem = document.createElement("div");
         pokemonItem.className = "pokemon-item";
+        // HTML interno
         pokemonItem.innerHTML = `
             <img src="${pokemon.img}" alt="${pokemon.name}">
             <h3>${pokemon.name}</h3>
